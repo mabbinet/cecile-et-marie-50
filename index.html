@@ -486,54 +486,164 @@
   <a href="#rsvp">RSVP</a>
 </nav>
 
-<!-- HERO - typographic festive -->
+<!-- HERO - day to night transition -->
 <style>
-  /* ── HERO TYPOGRAPHIC ── */
+  /* ── HERO — TRANSITION JOUR → NUIT ── */
   #hero {
     position: relative; width: 100%; min-height: 100vh; min-height: 100svh;
     overflow: hidden; display: flex; flex-direction: column;
     align-items: center; justify-content: center;
+  }
+
+  /* Couches de fond superposées */
+  .hero-layer {
+    position: absolute; inset: 0;
+    transition: opacity 3s ease-in-out;
+  }
+
+  /* JOUR — après-midi ensoleillé au bord du lac */
+  .hero-day {
     background: linear-gradient(
       180deg,
       #b8e0f0 0%,
-      #cce8f4 25%,
-      #f0d8b8 55%,
-      #f4c98a 75%,
+      #cce8f4 22%,
+      #f0d8b8 50%,
+      #f4c98a 72%,
       #4db8c8 100%
     );
+    opacity: 1;
   }
-  /* Soleil scintillant */
+
+  /* NUIT — soirée élégante étoilée */
+  .hero-night {
+    background: linear-gradient(
+      180deg,
+      #0a1428 0%,
+      #1a2e4a 25%,
+      #2d4a6e 50%,
+      #3a5a7a 70%,
+      #1a3a5a 100%
+    );
+    opacity: 0;
+  }
+
+  /* État NUIT - active après l'animation */
+  #hero.is-night .hero-day { opacity: 0; }
+  #hero.is-night .hero-night { opacity: 1; }
+
+  /* SOLEIL (visible en mode jour) */
   .hero-sun {
     position: absolute;
-    top: 12%;
+    top: 13%;
     right: 18%;
     width: clamp(80px, 12vw, 140px);
     height: clamp(80px, 12vw, 140px);
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(255,235,170,1) 0%, rgba(255,210,100,0.7) 40%, rgba(255,200,80,0) 70%);
+    background: radial-gradient(circle, rgba(255,235,170,1) 0%, rgba(255,210,100,0.8) 40%, rgba(255,200,80,0) 70%);
     filter: blur(2px);
+    z-index: 1;
+    pointer-events: none;
+    transition: opacity 3s ease-in-out, transform 3s ease-in-out;
     animation: sunGlow 6s ease-in-out infinite;
+  }
+  #hero.is-night .hero-sun {
+    opacity: 0;
+    transform: translateY(80px);
+  }
+  @keyframes sunGlow {
+    0%, 100% { box-shadow: 0 0 60px 10px rgba(255,210,100,0.4); }
+    50%      { box-shadow: 0 0 80px 18px rgba(255,210,100,0.55); }
+  }
+
+  /* LUNE (visible en mode nuit) */
+  .hero-moon {
+    position: absolute;
+    top: 12%;
+    right: 20%;
+    width: clamp(70px, 10vw, 110px);
+    height: clamp(70px, 10vw, 110px);
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #fff8e0 0%, #f0e8c0 50%, #d8c890 80%);
+    box-shadow:
+      0 0 40px rgba(255,248,224,0.4),
+      inset -8px -8px 20px rgba(180,160,100,0.3);
+    opacity: 0;
+    transform: translateY(-80px);
+    transition: opacity 3s ease-in-out, transform 3s ease-in-out;
     z-index: 1;
     pointer-events: none;
   }
-  @keyframes sunGlow {
-    0%, 100% { transform: scale(1); opacity: 0.85; }
-    50%      { transform: scale(1.08); opacity: 1; }
+  #hero.is-night .hero-moon {
+    opacity: 1;
+    transform: translateY(0);
   }
-  /* Reflets sur l'eau (bottom) */
+
+  /* ÉTOILES (visibles en mode nuit) */
+  .hero-stars {
+    position: absolute; inset: 0;
+    z-index: 1; pointer-events: none;
+    opacity: 0;
+    transition: opacity 3s ease-in-out;
+  }
+  #hero.is-night .hero-stars { opacity: 1; }
+
+  .star {
+    position: absolute;
+    width: 2px; height: 2px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 0 4px white, 0 0 8px rgba(255,255,255,0.6);
+    animation: starTwinkle 3s ease-in-out infinite;
+  }
+  .star.big   { width: 3px; height: 3px; }
+  .star.small { width: 1.5px; height: 1.5px; opacity: 0.7; }
+  /* Positions des étoiles */
+  .star:nth-child(1)  { top: 8%;  left: 12%; animation-delay: 0s; }
+  .star:nth-child(2)  { top: 14%; left: 35%; animation-delay: 0.4s; }
+  .star:nth-child(3)  { top: 6%;  left: 62%; animation-delay: 0.8s; }
+  .star:nth-child(4)  { top: 22%; left: 78%; animation-delay: 1.2s; }
+  .star:nth-child(5)  { top: 30%; left: 8%;  animation-delay: 0.6s; }
+  .star:nth-child(6)  { top: 18%; left: 48%; animation-delay: 1.6s; }
+  .star:nth-child(7)  { top: 4%;  left: 88%; animation-delay: 2s; }
+  .star:nth-child(8)  { top: 24%; left: 22%; animation-delay: 1s; }
+  .star:nth-child(9)  { top: 16%; left: 70%; animation-delay: 1.4s; }
+  .star:nth-child(10) { top: 32%; left: 55%; animation-delay: 0.2s; }
+  .star:nth-child(11) { top: 10%; left: 28%; animation-delay: 1.8s; }
+  .star:nth-child(12) { top: 26%; left: 40%; animation-delay: 0.5s; }
+  @keyframes starTwinkle {
+    0%, 100% { opacity: 0.3; transform: scale(0.8); }
+    50%      { opacity: 1;   transform: scale(1.2); }
+  }
+
+  /* MONTAGNES (visibles dans les deux modes mais teintes différentes) */
+  .hero-mountains {
+    position: absolute;
+    bottom: 28%;
+    left: 0; right: 0;
+    height: 60px;
+    background: rgba(45,74,110,0.12);
+    clip-path: polygon(0 100%, 8% 60%, 18% 80%, 28% 50%, 38% 75%, 50% 45%, 62% 70%, 74% 55%, 86% 78%, 100% 65%, 100% 100%);
+    z-index: 1;
+    pointer-events: none;
+    transition: background 3s ease-in-out;
+  }
+  #hero.is-night .hero-mountains {
+    background: rgba(10,20,40,0.6);
+  }
+
+  /* REFLETS SUR L'EAU */
   .hero-shimmer {
     position: absolute; left: 0; right: 0; bottom: 0;
     height: 30%;
-    background:
-      repeating-linear-gradient(90deg,
-        transparent 0px,
-        rgba(255,255,255,0.08) 30px,
-        transparent 60px,
-        rgba(255,255,255,0.04) 90px,
-        transparent 120px
-      );
-    pointer-events: none;
-    z-index: 1;
+    z-index: 1; pointer-events: none;
+    background: repeating-linear-gradient(90deg,
+      transparent 0px,
+      rgba(255,255,255,0.08) 30px,
+      transparent 60px,
+      rgba(255,255,255,0.04) 90px,
+      transparent 120px
+    );
+    overflow: hidden;
   }
   .hero-shimmer::before {
     content: '';
@@ -545,9 +655,27 @@
     0%   { transform: translateX(-100%); }
     100% { transform: translateX(100%); }
   }
-  /* Confetti dorés flottants */
+  /* Reflets supplémentaires de lune sur l'eau (visibles la nuit) */
+  .hero-moon-reflect {
+    position: absolute;
+    bottom: 8%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: clamp(40px, 6vw, 70px);
+    height: 20px;
+    background: radial-gradient(ellipse, rgba(255,248,224,0.5) 0%, transparent 70%);
+    filter: blur(3px);
+    opacity: 0;
+    transition: opacity 3s ease-in-out;
+    z-index: 1;
+    pointer-events: none;
+  }
+  #hero.is-night .hero-moon-reflect { opacity: 1; }
+
+  /* CONFETTI dorés — toujours présents */
   .hero-confetti {
-    position: absolute; inset: 0; pointer-events: none; z-index: 1;
+    position: absolute; inset: 0;
+    pointer-events: none; z-index: 2;
     overflow: hidden;
   }
   .confetti-piece {
@@ -573,7 +701,38 @@
     100% { transform: translateY(110vh) rotate(720deg);  opacity: 0; }
   }
 
-  /* Hero content */
+  /* TOGGLE bouton mode jour/nuit */
+  .hero-toggle {
+    position: absolute;
+    top: 78px;
+    right: 20px;
+    z-index: 4;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(10px);
+    border: 1.5px solid var(--navy);
+    color: var(--navy);
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  }
+  .hero-toggle:hover {
+    transform: scale(1.1);
+    background: rgba(255,255,255,1);
+  }
+  #hero.is-night .hero-toggle {
+    background: rgba(26,46,74,0.9);
+    border-color: rgba(255,255,255,0.4);
+    color: white;
+  }
+  #hero.is-night .hero-toggle:hover {
+    background: rgba(26,46,74,1);
+  }
+
+  /* CONTENU TEXTE */
   .hero-content-new {
     position: relative; z-index: 3;
     text-align: center;
@@ -590,6 +749,11 @@
     opacity: 0.65;
     margin-bottom: 20px;
     font-weight: 400;
+    transition: color 3s ease-in-out, opacity 3s ease-in-out;
+  }
+  #hero.is-night .hero-pretitle {
+    color: rgba(255,255,255,0.9);
+    opacity: 0.75;
   }
   .hero-names-new {
     font-family: 'Playfair Display', serif;
@@ -597,15 +761,24 @@
     font-weight: 700; font-style: italic;
     color: var(--navy); line-height: 1;
     margin-bottom: 4px;
+    transition: color 3s ease-in-out, text-shadow 3s ease-in-out;
+  }
+  #hero.is-night .hero-names-new {
+    color: white;
+    text-shadow: 0 0 30px rgba(244,201,138,0.4);
   }
   .hero-amp {
     display: inline-block;
     font-style: italic;
     margin: 0 12px;
     color: var(--gold);
-    -webkit-text-fill-color: initial;
-    background: none;
+    transition: color 3s ease-in-out;
   }
+  #hero.is-night .hero-amp {
+    color: #ffd700;
+    text-shadow: 0 0 20px rgba(255,215,0,0.6);
+  }
+
   .hero-50-new {
     font-family: 'Playfair Display', serif;
     font-size: clamp(140px, 28vw, 280px);
@@ -629,13 +802,16 @@
     -webkit-text-fill-color: transparent;
     filter: drop-shadow(0 4px 24px rgba(212,175,55,0.35)) drop-shadow(0 0 8px rgba(255,215,0,0.4));
     animation: goldShine 6s ease-in-out infinite;
-    position: relative;
+    transition: filter 3s ease-in-out;
+  }
+  #hero.is-night .hero-50-new {
+    filter: drop-shadow(0 4px 30px rgba(255,215,0,0.6)) drop-shadow(0 0 16px rgba(255,215,0,0.5));
   }
   @keyframes goldShine {
     0%, 100% { background-position: 0% 50%; }
     50%      { background-position: 100% 50%; }
   }
-  /* Sparkles autour du 50 */
+
   .hero-50-wrap {
     position: relative;
     display: inline-block;
@@ -665,7 +841,10 @@
     color: var(--navy);
     opacity: 0.85;
     margin-bottom: 28px;
+    transition: color 3s ease-in-out;
   }
+  #hero.is-night .hero-celebrate { color: rgba(255,255,255,0.92); }
+
   .hero-divider {
     width: 80px; height: 1.5px;
     background: linear-gradient(90deg, transparent, var(--gold), transparent);
@@ -678,7 +857,10 @@
     color: var(--navy);
     margin-bottom: 6px;
     letter-spacing: 0.02em;
+    transition: color 3s ease-in-out;
   }
+  #hero.is-night .hero-date-new { color: white; }
+
   .hero-location-new {
     font-family: 'Cormorant Garamond', serif;
     font-size: clamp(15px, 2.5vw, 19px);
@@ -686,7 +868,12 @@
     opacity: 0.75;
     font-style: italic;
     margin-bottom: 32px;
+    transition: color 3s ease-in-out;
   }
+  #hero.is-night .hero-location-new {
+    color: rgba(255,255,255,0.85);
+  }
+
   .hero-cta {
     display: inline-block;
     background: var(--navy);
@@ -699,7 +886,7 @@
     font-weight: 700;
     padding: 16px 42px;
     border-radius: 40px;
-    transition: all 0.3s ease;
+    transition: all 0.3s ease, background 3s ease-in-out, box-shadow 3s ease-in-out;
     box-shadow: 0 4px 20px rgba(26,46,74,0.3);
   }
   .hero-cta:hover {
@@ -707,37 +894,77 @@
     transform: translateY(-3px);
     box-shadow: 0 8px 30px rgba(26,46,74,0.4);
   }
+  #hero.is-night .hero-cta {
+    background: linear-gradient(135deg, #ffd700, #d4af37);
+    color: var(--navy);
+    box-shadow: 0 4px 24px rgba(255,215,0,0.4);
+  }
+  #hero.is-night .hero-cta:hover {
+    box-shadow: 0 8px 32px rgba(255,215,0,0.55);
+  }
 
-  /* Mountain silhouette in distance */
-  .hero-mountains {
-    position: absolute;
-    bottom: 28%;
-    left: 0; right: 0;
-    height: 60px;
-    background-image:
-      linear-gradient(180deg, transparent 0%, rgba(45,74,110,0.12) 100%);
-    clip-path: polygon(0 100%, 8% 60%, 18% 80%, 28% 50%, 38% 75%, 50% 45%, 62% 70%, 74% 55%, 86% 78%, 100% 65%, 100% 100%);
-    z-index: 1;
-    pointer-events: none;
+  .scroll-indicator {
+    transition: color 3s ease-in-out;
+  }
+  #hero.is-night .scroll-indicator {
+    color: white;
+    opacity: 0.7;
   }
 
   @media (max-width: 600px) {
     .hero-50-new { font-size: clamp(120px, 32vw, 200px); }
-    .hero-sun { top: 8%; right: 10%; }
+    .hero-sun, .hero-moon { top: 8%; right: 10%; }
+    .hero-toggle { top: 60px; right: 12px; width: 38px; height: 38px; font-size: 16px; }
+  }
+
+  /* Reduced motion : pas d'animation auto, juste statique en jour */
+  @media (prefers-reduced-motion: reduce) {
+    .hero-day, .hero-night, .hero-sun, .hero-moon, .hero-stars,
+    .hero-pretitle, .hero-names-new, .hero-amp, .hero-50-new,
+    .hero-celebrate, .hero-date-new, .hero-location-new,
+    .hero-cta, .hero-mountains, .scroll-indicator, .hero-moon-reflect {
+      transition-duration: 0.5s !important;
+    }
   }
 </style>
 
 <header id="hero">
-  <!-- soleil -->
+  <!-- Couches de fond -->
+  <div class="hero-layer hero-day" aria-hidden="true"></div>
+  <div class="hero-layer hero-night" aria-hidden="true"></div>
+
+  <!-- Soleil -->
   <div class="hero-sun" aria-hidden="true"></div>
 
-  <!-- silhouette montagnes -->
+  <!-- Lune -->
+  <div class="hero-moon" aria-hidden="true"></div>
+
+  <!-- Étoiles -->
+  <div class="hero-stars" aria-hidden="true">
+    <div class="star big"></div>
+    <div class="star"></div>
+    <div class="star big"></div>
+    <div class="star small"></div>
+    <div class="star"></div>
+    <div class="star big"></div>
+    <div class="star small"></div>
+    <div class="star"></div>
+    <div class="star big"></div>
+    <div class="star small"></div>
+    <div class="star"></div>
+    <div class="star big"></div>
+  </div>
+
+  <!-- Silhouette montagnes -->
   <div class="hero-mountains" aria-hidden="true"></div>
 
-  <!-- reflets eau -->
+  <!-- Reflets eau -->
   <div class="hero-shimmer" aria-hidden="true"></div>
 
-  <!-- confetti dorés -->
+  <!-- Reflet de lune sur l'eau -->
+  <div class="hero-moon-reflect" aria-hidden="true"></div>
+
+  <!-- Confetti dorés -->
   <div class="hero-confetti" aria-hidden="true">
     <div class="confetti-piece"></div>
     <div class="confetti-piece"></div>
@@ -750,7 +977,12 @@
     <div class="confetti-piece"></div>
   </div>
 
-  <!-- contenu -->
+  <!-- Bouton toggle jour/nuit (manuel) -->
+  <button class="hero-toggle" id="hero-toggle" type="button" aria-label="Toggle day/night">
+    <span id="toggle-icon">🌙</span>
+  </button>
+
+  <!-- Contenu -->
   <div class="hero-content-new">
     <div class="hero-pretitle" data-en>You are invited to celebrate</div>
     <div class="hero-pretitle" data-fr>Venez célébrer</div>
@@ -778,13 +1010,57 @@
     <a href="#rsvp" class="hero-cta" data-fr>Confirmer ma présence</a>
   </div>
 
-  <!-- scroll indicator -->
   <a href="#countdown-section" class="scroll-indicator" aria-label="Scroll down">
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <polyline points="6 9 12 15 18 9"></polyline>
     </svg>
   </a>
 </header>
+
+<script>
+  // Animation cyclique jour/nuit du hero
+  (function() {
+    var hero = document.getElementById('hero');
+    var toggleBtn = document.getElementById('hero-toggle');
+    var toggleIcon = document.getElementById('toggle-icon');
+    var isNight = false;
+    var autoInterval;
+
+    function updateMode() {
+      hero.classList.toggle('is-night', isNight);
+      toggleIcon.textContent = isNight ? '☀️' : '🌙';
+    }
+
+    function toggleMode() {
+      isNight = !isNight;
+      updateMode();
+    }
+
+    function startAutoCycle() {
+      // Démarre le cycle après 5 secondes (laisse le temps de voir le mode jour)
+      setTimeout(function() {
+        toggleMode();
+        // Puis alterne toutes les 8 secondes
+        autoInterval = setInterval(toggleMode, 8000);
+      }, 5000);
+    }
+
+    // Bouton manuel
+    toggleBtn.addEventListener('click', function() {
+      // Stoppe le cycle auto si on clique manuellement
+      if (autoInterval) {
+        clearInterval(autoInterval);
+        autoInterval = null;
+      }
+      toggleMode();
+    });
+
+    // Démarre le cycle automatique
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      startAutoCycle();
+    }
+  })();
+</script>
 
 <!-- COUNTDOWN -->
 <div id="countdown-section" style="background-image: radial-gradient(ellipse at top, rgba(244,201,138,0.08) 0%, transparent 60%);">
