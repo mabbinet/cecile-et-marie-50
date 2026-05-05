@@ -1,10 +1,13 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Cécile & Marie are turning 50! Join us on August 29, 2026 at Port-Gitana, Bellevue for a lakeside celebration.">
-<meta name="theme-color" content="#1a2e4a">
+<meta name="theme-color" content="#faf6ec">
+<meta name="color-scheme" content="light only">
+<meta name="supported-color-schemes" content="light">
 <meta property="og:title" content="Cécile & Marie — 50">
 <meta property="og:description" content="A lakeside celebration · August 29, 2026 · Port-Gitana, Bellevue">
 <meta property="og:type" content="website">
@@ -14,454 +17,523 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
 <style>
   :root {
+    color-scheme: light only;
     --lake: #4db8c8;
     --lake-deep: #2a9ab0;
     --navy: #1a2e4a;
     --navy-mid: #2d4a6e;
-    --sand: #f0e8d0;
+    --sand: #faf6ec;
+    --sand-deep: #f4eed8;
+    --paper: #fffdf7;
     --sunset: #f4c98a;
+    --gold: #d4af37;
+    --gold-deep: #b8860b;
+    --ink: #1a2e4a;
+    --ink-soft: rgba(26,46,74,0.65);
+    --ink-faint: rgba(26,46,74,0.45);
+    --hairline: rgba(26,46,74,0.12);
   }
+  html { color-scheme: light only !important; background: #faf6ec !important; }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   body {
     font-family: 'Cormorant Garamond', serif;
-    background: var(--sand);
-    color: var(--navy);
+    background: var(--sand) !important;
+    color: var(--ink) !important;
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.55;
+    color-scheme: light only;
   }
 
-  /* ── LANG BAR ── */
-  .lang-bar {
-    position: fixed; top: 0; right: 0; z-index: 1000;
-    display: flex; padding: 12px 20px;
-  }
-  .lang-btn {
-    background: rgba(255,255,255,0.85);
-    backdrop-filter: blur(8px);
-    border: 1.5px solid var(--navy);
-    color: var(--navy);
-    font-family: 'Libre Baskerville', serif;
-    font-size: 11px; letter-spacing: 0.12em;
-    padding: 6px 14px; cursor: pointer;
-    transition: all 0.25s; text-transform: uppercase;
-  }
-  .lang-btn:first-child { border-radius: 20px 0 0 20px; }
-  .lang-btn:last-child { border-radius: 0 20px 20px 0; border-left: none; }
-  .lang-btn.active, .lang-btn:hover { background: var(--navy); color: white; }
+/* ── LANG BAR ── */
+.lang-bar {
+position: fixed; top: 0; right: 0; z-index: 1000;
+display: flex; padding: 12px 20px;
+}
+.lang-btn {
+background: rgba(255,255,255,0.85);
+backdrop-filter: blur(8px);
+border: 1.5px solid var(–navy);
+color: var(–navy);
+font-family: ‘Libre Baskerville’, serif;
+font-size: 11px; letter-spacing: 0.12em;
+padding: 6px 14px; cursor: pointer;
+transition: all 0.25s; text-transform: uppercase;
+}
+.lang-btn:first-child { border-radius: 20px 0 0 20px; }
+.lang-btn:last-child { border-radius: 0 20px 20px 0; border-left: none; }
+.lang-btn.active, .lang-btn:hover { background: var(–navy); color: white; }
 
-  /* ── NAV ── */
-  nav {
-    position: fixed; top: 0; left: 0; width: 100%; z-index: 999;
-    display: flex; justify-content: center; gap: 40px;
-    padding: 14px 20px;
-    background: rgba(255,255,255,0.7); backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(26,46,74,0.1);
-  }
-  nav a {
-    font-family: 'Libre Baskerville', serif; font-size: 11px;
-    letter-spacing: 0.15em; text-transform: uppercase;
-    color: var(--navy); text-decoration: none; opacity: 0.75;
-    transition: opacity 0.2s;
-  }
-  nav a:hover { opacity: 1; }
+/* ── NAV ── */
+nav {
+position: fixed; top: 0; left: 0; width: 100%; z-index: 999;
+display: flex; justify-content: center; gap: 40px;
+padding: 14px 20px;
+background: rgba(255,255,255,0.7); backdrop-filter: blur(12px);
+border-bottom: 1px solid rgba(26,46,74,0.1);
+}
+nav a {
+font-family: ‘Libre Baskerville’, serif; font-size: 11px;
+letter-spacing: 0.15em; text-transform: uppercase;
+color: var(–navy); text-decoration: none; opacity: 0.75;
+transition: opacity 0.2s;
+}
+nav a:hover { opacity: 1; }
 
-  /* ── HERO ── */
-  #hero {
-    position: relative; width: 100%; min-height: 100vh;
-    overflow: hidden; display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-  }
-  .hero-img-wrap {
-    position: absolute; inset: 0; z-index: 0;
-  }
-  .hero-img-wrap img {
-    width: 100%; height: 100%; object-fit: cover; object-position: center top;
-    display: block;
-  }
-  /* Gradient overlay — masque le texte Save the Date en haut, fondu vers le bas */
-  .hero-img-wrap::after {
-    content: '';
-    position: absolute; inset: 0;
-    background: linear-gradient(
-      180deg,
-      rgba(255,255,255,0.72) 0%,
-      rgba(255,255,255,0.35) 18%,
-      rgba(255,255,255,0.0)  38%,
-      rgba(255,255,255,0.0)  60%,
-      rgba(26,46,74,0.15)    80%,
-      rgba(26,46,74,0.45)    100%
-    );
-  }
-  .hero-content {
-    position: relative; z-index: 2;
-    text-align: center; padding: 100px 20px 60px;
-    animation: fadeUp 1.2s ease both;
-  }
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  .hero-names {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(36px, 8vw, 80px);
-    font-weight: 700; font-style: italic;
-    color: var(--navy); line-height: 1;
-    text-shadow: 0 2px 20px rgba(255,255,255,0.8);
-  }
-  .hero-50 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(80px, 18vw, 160px);
-    font-weight: 900; color: var(--navy);
-    line-height: 0.9; letter-spacing: -0.02em;
-    text-shadow: 0 4px 30px rgba(255,255,255,0.6);
-    margin-top: -8px;
-  }
-  .hero-sub {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(16px, 3vw, 22px);
-    color: var(--navy); opacity: 0.85;
-    margin-top: 12px; font-style: italic;
-    text-shadow: 0 1px 10px rgba(255,255,255,0.9);
-  }
-  .hero-date {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(16px, 3vw, 26px);
-    font-weight: 700; color: var(--navy);
-    margin-top: 18px;
-    text-shadow: 0 2px 12px rgba(255,255,255,0.8);
-  }
-  .hero-location {
-    font-size: clamp(13px, 2.5vw, 18px);
-    color: var(--navy); opacity: 0.75;
-    margin-top: 6px; font-style: italic;
-    text-shadow: 0 1px 8px rgba(255,255,255,0.9);
-  }
-  .hero-tagline {
-    margin-top: 30px;
-    font-size: clamp(15px, 2.5vw, 20px);
-    font-style: italic; color: var(--navy); opacity: 0.8;
-    line-height: 1.6;
-    text-shadow: 0 1px 8px rgba(255,255,255,0.9);
-  }
-  .cta-btn {
-    display: inline-block; margin-top: 24px;
-    background: var(--navy); color: white;
-    font-family: 'Libre Baskerville', serif;
-    font-size: 13px; letter-spacing: 0.15em;
-    text-transform: uppercase; text-decoration: none;
-    padding: 14px 36px; border-radius: 40px;
-    transition: background 0.25s, transform 0.2s;
-  }
-  .cta-btn:hover { background: var(--navy-mid); transform: translateY(-2px); }
+/* ── HERO ── */
+#hero {
+position: relative; width: 100%; min-height: 100vh;
+overflow: hidden; display: flex; flex-direction: column;
+align-items: center; justify-content: center;
+}
+.hero-img-wrap {
+position: absolute; inset: 0; z-index: 0;
+}
+.hero-img-wrap img {
+width: 100%; height: 100%; object-fit: cover; object-position: center top;
+display: block;
+}
+/* Gradient overlay — masque le texte Save the Date en haut, fondu vers le bas */
+.hero-img-wrap::after {
+content: ‘’;
+position: absolute; inset: 0;
+background: linear-gradient(
+180deg,
+rgba(255,255,255,0.72) 0%,
+rgba(255,255,255,0.35) 18%,
+rgba(255,255,255,0.0)  38%,
+rgba(255,255,255,0.0)  60%,
+rgba(26,46,74,0.15)    80%,
+rgba(26,46,74,0.45)    100%
+);
+}
+.hero-content {
+position: relative; z-index: 2;
+text-align: center; padding: 100px 20px 60px;
+animation: fadeUp 1.2s ease both;
+}
+@keyframes fadeUp {
+from { opacity: 0; transform: translateY(30px); }
+to   { opacity: 1; transform: translateY(0); }
+}
+.hero-names {
+font-family: ‘Playfair Display’, serif;
+font-size: clamp(36px, 8vw, 80px);
+font-weight: 700; font-style: italic;
+color: var(–navy); line-height: 1;
+text-shadow: 0 2px 20px rgba(255,255,255,0.8);
+}
+.hero-50 {
+font-family: ‘Playfair Display’, serif;
+font-size: clamp(80px, 18vw, 160px);
+font-weight: 900; color: var(–navy);
+line-height: 0.9; letter-spacing: -0.02em;
+text-shadow: 0 4px 30px rgba(255,255,255,0.6);
+margin-top: -8px;
+}
+.hero-sub {
+font-family: ‘Cormorant Garamond’, serif;
+font-size: clamp(16px, 3vw, 22px);
+color: var(–navy); opacity: 0.85;
+margin-top: 12px; font-style: italic;
+text-shadow: 0 1px 10px rgba(255,255,255,0.9);
+}
+.hero-date {
+font-family: ‘Playfair Display’, serif;
+font-size: clamp(16px, 3vw, 26px);
+font-weight: 700; color: var(–navy);
+margin-top: 18px;
+text-shadow: 0 2px 12px rgba(255,255,255,0.8);
+}
+.hero-location {
+font-size: clamp(13px, 2.5vw, 18px);
+color: var(–navy); opacity: 0.75;
+margin-top: 6px; font-style: italic;
+text-shadow: 0 1px 8px rgba(255,255,255,0.9);
+}
+.hero-tagline {
+margin-top: 30px;
+font-size: clamp(15px, 2.5vw, 20px);
+font-style: italic; color: var(–navy); opacity: 0.8;
+line-height: 1.6;
+text-shadow: 0 1px 8px rgba(255,255,255,0.9);
+}
+.cta-btn {
+display: inline-block; margin-top: 24px;
+background: var(–navy); color: white;
+font-family: ‘Libre Baskerville’, serif;
+font-size: 13px; letter-spacing: 0.15em;
+text-transform: uppercase; text-decoration: none;
+padding: 14px 36px; border-radius: 40px;
+transition: background 0.25s, transform 0.2s;
+}
+.cta-btn:hover { background: var(–navy-mid); transform: translateY(-2px); }
 
-  /* ── COUNTDOWN ── */
-  #countdown-section {
-    background: var(--navy); color: white;
-    padding: 60px 20px; text-align: center;
-  }
-  .section-label {
-    font-family: 'Libre Baskerville', serif;
-    font-size: 11px; letter-spacing: 0.25em;
-    text-transform: uppercase; opacity: 0.5; margin-bottom: 32px;
-  }
-  .countdown-row {
-    display: flex; justify-content: center;
-    gap: 40px; flex-wrap: wrap;
-  }
-  .countdown-item { text-align: center; }
-  .countdown-num {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(48px, 10vw, 80px);
-    font-weight: 700; line-height: 1; color: var(--sunset);
-  }
-  .countdown-lbl {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 14px; letter-spacing: 0.2em;
-    text-transform: uppercase; opacity: 0.6; margin-top: 6px;
-  }
+/* ── COUNTDOWN — EDITORIAL ── */
+#countdown-section {
+background: var(–paper);
+color: var(–ink);
+padding: 72px 20px 80px; text-align: center;
+border-top: 1px solid var(–hairline);
+border-bottom: 1px solid var(–hairline);
+}
+.section-label {
+font-family: ‘Libre Baskerville’, serif;
+font-size: 10px; letter-spacing: 0.4em;
+text-transform: uppercase; color: var(–ink-faint);
+margin-bottom: 36px; font-weight: 400;
+}
+.countdown-row {
+display: flex; justify-content: center;
+gap: 40px; flex-wrap: wrap;
+}
+.countdown-item { text-align: center; }
+.countdown-num {
+font-family: ‘Playfair Display’, serif;
+font-size: clamp(52px, 11vw, 88px);
+font-weight: 400; line-height: 1;
+color: var(–ink);
+font-variant-numeric: tabular-nums;
+letter-spacing: -0.02em;
+font-style: italic;
+}
+.countdown-lbl {
+font-family: ‘Libre Baskerville’, serif;
+font-size: 9px; letter-spacing: 0.35em;
+text-transform: uppercase;
+color: var(–ink-faint);
+margin-top: 12px; font-weight: 400;
+}
 
-  /* ── SECTION TITLES ── */
-  .section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(28px, 5vw, 44px);
-    font-weight: 700; font-style: italic;
-    color: var(--navy); margin-bottom: 40px; text-align: center;
-  }
-  .section-title::after {
-    content: ''; display: block; width: 60px; height: 2px;
-    background: var(--lake); margin: 14px auto 0; border-radius: 2px;
-  }
+/* ── SECTION TITLES ── */
+.section-title {
+font-family: ‘Playfair Display’, serif;
+font-size: clamp(34px, 5vw, 56px);
+font-weight: 400; font-style: italic;
+color: var(–ink); margin-bottom: 0; text-align: center;
+letter-spacing: -0.01em;
+line-height: 1.1;
+}
+.section-title::after {
+content: ‘’;
+display: block;
+width: 32px;
+height: 1px;
+background: var(–gold);
+margin: 28px auto 56px;
+opacity: 0.7;
+}
 
-  /* ── PROGRAMME TIMELINE ── */
-  .timeline {
-    display: flex; flex-direction: column; gap: 0;
-    max-width: 560px; margin: 0 auto;
-  }
-  .tl-item {
-    display: grid; grid-template-columns: 80px 40px 1fr;
-    align-items: start; padding: 16px 0;
-    opacity: 0; transform: translateX(-20px);
-    transition: all 0.5s ease;
-  }
-  .tl-item.visible { opacity: 1; transform: translateX(0); }
-  .tl-time {
-    font-family: 'Playfair Display', serif; font-size: 18px;
-    font-weight: 700; color: var(--lake-deep);
-    padding-top: 2px; text-align: right; padding-right: 16px;
-  }
-  .tl-dot-col {
-    display: flex; flex-direction: column; align-items: center;
-  }
-  .tl-dot {
-    width: 12px; height: 12px; border-radius: 50%;
-    background: var(--lake); border: 2px solid var(--navy);
-    margin-top: 5px; flex-shrink: 0;
-  }
-  .tl-line {
-    width: 2px; flex: 1; background: rgba(26,46,74,0.15);
-    margin-top: 4px; min-height: 30px;
-  }
-  .tl-body { padding-left: 12px; }
-  .tl-event {
-    font-family: 'Playfair Display', serif;
-    font-size: 18px; font-weight: 600; color: var(--navy);
-  }
-  .tl-desc {
-    font-size: 15px; color: var(--navy); opacity: 0.65;
-    margin-top: 2px; font-style: italic;
-  }
+/* ── PROGRAMME TIMELINE ── */
+.timeline {
+display: flex; flex-direction: column; gap: 0;
+max-width: 560px; margin: 0 auto;
+}
+.tl-item {
+display: grid; grid-template-columns: 80px 40px 1fr;
+align-items: start; padding: 16px 0;
+opacity: 0; transform: translateX(-20px);
+transition: all 0.5s ease;
+}
+.tl-item.visible { opacity: 1; transform: translateX(0); }
+.tl-time {
+font-family: ‘Playfair Display’, serif; font-size: 18px;
+font-weight: 700; color: var(–lake-deep);
+padding-top: 2px; text-align: right; padding-right: 16px;
+}
+.tl-dot-col {
+display: flex; flex-direction: column; align-items: center;
+}
+.tl-dot {
+width: 12px; height: 12px; border-radius: 50%;
+background: var(–lake); border: 2px solid var(–navy);
+margin-top: 5px; flex-shrink: 0;
+}
+.tl-line {
+width: 2px; flex: 1; background: rgba(26,46,74,0.15);
+margin-top: 4px; min-height: 30px;
+}
+.tl-body { padding-left: 12px; }
+.tl-event {
+font-family: ‘Playfair Display’, serif;
+font-size: 18px; font-weight: 600; color: var(–navy);
+}
+.tl-desc {
+font-size: 15px; color: var(–navy); opacity: 0.65;
+margin-top: 2px; font-style: italic;
+}
 
-  /* ── INFO CARDS ── */
-  .info-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 28px;
-  }
-  .info-card {
-    background: white; border-radius: 16px; padding: 32px 28px;
-    border: 1px solid rgba(26,46,74,0.08);
-    box-shadow: 0 4px 24px rgba(26,46,74,0.06);
-    opacity: 0; transform: translateY(20px); transition: all 0.5s ease;
-  }
-  .info-card.visible { opacity: 1; transform: translateY(0); }
-  .info-card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(26,46,74,0.12); }
-  .info-icon { font-size: 32px; margin-bottom: 14px; }
-  .info-card h3 {
-    font-family: 'Playfair Display', serif; font-size: 20px;
-    font-style: italic; color: var(--navy); margin-bottom: 10px;
-  }
-  .info-card p { font-size: 15px; line-height: 1.7; color: var(--navy); opacity: 0.75; }
-  .info-card a { color: var(--lake-deep); text-decoration: underline; }
+/* ── INFO CARDS ── */
+.info-grid {
+display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+gap: 28px;
+}
+.info-card {
+background: var(–paper);
+padding: 44px 36px;
+border: none; border-radius: 0; box-shadow: none;
+opacity: 0; transform: translateY(20px);
+transition: opacity 0.7s ease, transform 0.7s ease, background 0.4s ease;
+color: var(–ink);
+}
+.info-card.visible { opacity: 1; transform: translateY(0); }
+.info-card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(26,46,74,0.12); }
+.info-icon { font-size: 32px; margin-bottom: 14px; }
+.info-card h3 {
+font-family: ‘Libre Baskerville’, serif;
+font-size: 11px; letter-spacing: 0.32em;
+text-transform: uppercase;
+color: var(–ink-faint);
+margin-bottom: 18px;
+font-weight: 400; font-style: normal;
+}
+.info-card p {
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 17px; line-height: 1.7;
+color: var(–ink); opacity: 0.85;
+}
+.info-card a {
+color: var(–ink); text-decoration: none;
+border-bottom: 1px solid var(–gold);
+padding-bottom: 1px;
+font-weight: 600;
+transition: color 0.3s, border-color 0.3s;
+}
+.info-card a:hover { color: var(–gold-deep); border-bottom-color: var(–gold-deep); }
 
-  /* ── DRESS CODE ── */
-  .palette { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 24px; }
-  .swatch {
-    width: 56px; height: 56px; border-radius: 50%;
-    border: 3px solid white; box-shadow: 0 2px 12px rgba(0,0,0,0.15);
-  }
-  .dresscode-text { text-align: center; font-size: 17px; line-height: 1.8; opacity: 0.8; font-style: italic; }
+/* ── DRESS CODE ── */
+.palette { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 24px; }
+.swatch {
+width: 56px; height: 56px; border-radius: 50%;
+border: 3px solid white; box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+}
+.dresscode-text { text-align: center; font-size: 17px; line-height: 1.8; opacity: 0.8; font-style: italic; }
 
-  /* ── RSVP ── */
-  #rsvp { background: var(--navy); border-radius: 24px; color: white; }
-  #rsvp .section-title { color: white; }
-  #rsvp .section-title::after { background: var(--sunset); }
-  .rsvp-form { max-width: 520px; margin: 0 auto; }
-  .form-group { margin-bottom: 20px; }
-  .form-group label {
-    display: block; font-family: 'Libre Baskerville', serif;
-    font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
-    opacity: 0.6; margin-bottom: 8px;
-  }
-  .form-group input, .form-group select, .form-group textarea {
-    width: 100%; background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.2); color: white;
-    font-family: 'Cormorant Garamond', serif; font-size: 17px;
-    padding: 12px 16px; border-radius: 8px; outline: none;
-    transition: border-color 0.2s;
-  }
-  .form-group input::placeholder, .form-group textarea::placeholder { opacity: 0.4; }
-  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--sunset); }
-  .form-group select option { background: var(--navy); color: white; }
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  .form-submit {
-    width: 100%; background: var(--sunset); color: var(--navy);
-    border: none; font-family: 'Libre Baskerville', serif;
-    font-size: 13px; letter-spacing: 0.15em; text-transform: uppercase;
-    padding: 16px; border-radius: 40px; cursor: pointer;
-    margin-top: 8px; transition: opacity 0.2s, transform 0.2s; font-weight: 700;
-  }
-  .form-submit:hover { opacity: 0.9; transform: translateY(-2px); }
-  .rsvp-deadline { text-align: center; font-style: italic; opacity: 0.5; font-size: 14px; margin-top: 20px; }
-  .success-msg {
-    display: none; text-align: center; padding: 40px;
-    font-size: 22px; font-style: italic; color: var(--sunset);
-  }
+/* ── RSVP ── */
+#rsvp { background: var(–navy); border-radius: 24px; color: white; }
+#rsvp .section-title { color: white; }
+#rsvp .section-title::after { background: var(–sunset); }
+.rsvp-form { max-width: 520px; margin: 0 auto; }
+.form-group { margin-bottom: 20px; }
+.form-group label {
+display: block; font-family: ‘Libre Baskerville’, serif;
+font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+opacity: 0.6; margin-bottom: 8px;
+}
+.form-group input, .form-group select, .form-group textarea {
+width: 100%; background: rgba(255,255,255,0.08);
+border: 1px solid rgba(255,255,255,0.2); color: white;
+font-family: ‘Cormorant Garamond’, serif; font-size: 17px;
+padding: 12px 16px; border-radius: 8px; outline: none;
+transition: border-color 0.2s;
+}
+.form-group input::placeholder, .form-group textarea::placeholder { opacity: 0.4; }
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(–sunset); }
+.form-group select option { background: var(–navy); color: white; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-submit {
+width: 100%; background: var(–sunset); color: var(–navy);
+border: none; font-family: ‘Libre Baskerville’, serif;
+font-size: 13px; letter-spacing: 0.15em; text-transform: uppercase;
+padding: 16px; border-radius: 40px; cursor: pointer;
+margin-top: 8px; transition: opacity 0.2s, transform 0.2s; font-weight: 700;
+}
+.form-submit:hover { opacity: 0.9; transform: translateY(-2px); }
+.rsvp-deadline { text-align: center; font-style: italic; opacity: 0.5; font-size: 14px; margin-top: 20px; }
+.success-msg {
+display: none; text-align: center; padding: 40px;
+font-size: 22px; font-style: italic; color: var(–sunset);
+}
 
-  /* ── FAQ ── */
-  .faq-list { max-width: 620px; margin: 0 auto; }
-  .faq-item { border-bottom: 1px solid rgba(26,46,74,0.12); padding: 20px 0; cursor: pointer; }
-  .faq-q {
-    font-family: 'Playfair Display', serif; font-size: 18px;
-    font-weight: 600; color: var(--navy);
-    display: flex; justify-content: space-between; align-items: center; gap: 16px;
-  }
-  .faq-q::after {
-    content: '+'; font-size: 24px; font-weight: 300;
-    color: var(--lake-deep); flex-shrink: 0; transition: transform 0.3s;
-  }
-  .faq-item.open .faq-q::after { transform: rotate(45deg); }
-  .faq-a {
-    font-size: 16px; line-height: 1.7; opacity: 0.7; font-style: italic;
-    max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s;
-  }
-  .faq-item.open .faq-a { max-height: 400px; padding-top: 12px; }
+/* ── FAQ — EDITORIAL ── */
+.faq-list { max-width: 720px; margin: 0 auto; }
+.faq-item {
+border-top: 1px solid var(–hairline);
+padding: 24px 0;
+cursor: pointer;
+}
+.faq-item:last-child { border-bottom: 1px solid var(–hairline); }
+.faq-q {
+font-family: ‘Playfair Display’, serif;
+font-size: 19px; font-weight: 400;
+color: var(–ink);
+display: flex; justify-content: space-between; align-items: flex-start;
+gap: 24px; line-height: 1.4;
+transition: color 0.3s ease;
+}
+.faq-item:hover .faq-q { color: var(–gold-deep); }
+.faq-q::after {
+content: ‘+’; font-size: 22px; font-weight: 200;
+color: var(–ink-faint); flex-shrink: 0;
+transition: transform 0.4s ease, color 0.3s ease;
+line-height: 1; padding-top: 4px;
+}
+.faq-item:hover .faq-q::after { color: var(–gold); }
+.faq-item.open .faq-q::after { transform: rotate(45deg); color: var(–gold); }
+.faq-a {
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 17px; line-height: 1.7;
+color: var(–ink-soft); font-style: normal;
+opacity: 0; max-height: 0; overflow: hidden;
+padding-right: 40px;
+transition: max-height 0.5s ease, padding 0.4s ease, opacity 0.4s 0.1s ease;
+}
+.faq-item.open .faq-a { max-height: 500px; padding-top: 14px; opacity: 1; }
+.faq-a a {
+color: var(–ink); text-decoration: none;
+border-bottom: 1px solid var(–gold); font-weight: 600;
+}
+.faq-a strong { font-weight: 600; color: var(–ink); }
 
-  /* ── FOOTER ── */
-  footer {
-    background: var(--navy); color: white;
-    text-align: center; padding: 40px 20px;
-    font-family: 'Cormorant Garamond', serif; font-size: 16px; font-style: italic;
-  }
-  footer strong {
-    font-family: 'Playfair Display', serif; font-style: normal;
-    display: block; font-size: 22px; margin-bottom: 8px;
-  }
+/* ── FOOTER ── */
+footer {
+background: var(–navy); color: white;
+text-align: center; padding: 40px 20px;
+font-family: ‘Cormorant Garamond’, serif; font-size: 16px; font-style: italic;
+}
+footer strong {
+font-family: ‘Playfair Display’, serif; font-style: normal;
+display: block; font-size: 22px; margin-bottom: 8px;
+}
 
-  /* ── WAVE ── */
-  .wave { display: block; width: 100%; overflow: hidden; line-height: 0; }
-  .wave svg { display: block; }
+/* ── WAVE ── */
+.wave { display: block; width: 100%; overflow: hidden; line-height: 0; }
+.wave svg { display: block; }
 
-  /* ── RESPONSIVE ── */
-  @media (max-width: 600px) {
-    nav { gap: 16px; padding: 10px 12px; }
-    nav a { font-size: 9px; letter-spacing: 0.1em; }
-    .form-row { grid-template-columns: 1fr; }
-    .tl-item { grid-template-columns: 65px 30px 1fr; }
-  }
+/* ── RESPONSIVE ── */
+@media (max-width: 600px) {
+nav { gap: 16px; padding: 10px 12px; }
+nav a { font-size: 9px; letter-spacing: 0.1em; }
+.form-row { grid-template-columns: 1fr; }
+.tl-item { grid-template-columns: 65px 30px 1fr; }
+}
 
-  /* language */
-  [data-fr] { display: none; }
-  body.fr [data-en] { display: none; }
-  body.fr [data-fr] { display: revert; }
-  .l-en { display: inline; }
-  .l-fr { display: none; }
-  body.fr .l-en { display: none; }
-  body.fr .l-fr { display: inline; }
+/* language */
+[data-fr] { display: none; }
+body.fr [data-en] { display: none; }
+body.fr [data-fr] { display: revert; }
+.l-en { display: inline; }
+.l-fr { display: none; }
+body.fr .l-en { display: none; }
+body.fr .l-fr { display: inline; }
 
-  /* ── SCROLL PROGRESS BAR ── */
-  .scroll-progress {
-    position: fixed; top: 0; left: 0;
-    height: 3px; background: linear-gradient(90deg, var(--lake), var(--sunset), #d4af37);
-    z-index: 1001; width: 0%;
-    transition: width 0.1s ease-out;
-  }
+/* ── SCROLL PROGRESS BAR ── */
+.scroll-progress {
+position: fixed; top: 0; left: 0;
+height: 3px; background: linear-gradient(90deg, var(–lake), var(–sunset), #d4af37);
+z-index: 1001; width: 0%;
+transition: width 0.1s ease-out;
+}
 
-  /* ── NAV AUTO-HIDE ── */
-  nav { transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-  nav.hidden { transform: translateY(-100%); }
+/* ── NAV AUTO-HIDE ── */
+nav { transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+nav.hidden { transform: translateY(-100%); }
 
-  /* ── BETTER FOCUS ── */
-  a:focus-visible, button:focus-visible {
-    outline: 2px solid var(--sunset);
-    outline-offset: 3px;
-    border-radius: 4px;
-  }
-  ::selection { background: var(--sunset); color: var(--navy); }
+/* ── BETTER FOCUS ── */
+a:focus-visible, button:focus-visible {
+outline: 2px solid var(–sunset);
+outline-offset: 3px;
+border-radius: 4px;
+}
+::selection { background: var(–sunset); color: var(–navy); }
 
-  /* ── HOVER ON CARDS ── */
-  .info-card { transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.3s ease; }
-  .info-card:hover { transform: translateY(-6px); box-shadow: 0 8px 32px rgba(26,46,74,0.14); }
-  .info-icon { display: inline-block; transition: transform 0.3s ease; }
-  .info-card:hover .info-icon { transform: scale(1.15) rotate(-5deg); }
-  .swatch { transition: transform 0.3s ease; }
-  .swatch:hover { transform: scale(1.12) rotate(8deg); }
+/* ── HOVER ON CARDS ── */
+.info-card { transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.3s ease; }
+.info-card:hover { background: #fff; transform: none; }
+.info-icon { display: inline-block; transition: transform 0.3s ease; }
+.info-card:hover .info-icon { transform: none; }
+.swatch { transition: transform 0.3s ease; }
+.swatch:hover { transform: scale(1.12) rotate(8deg); }
 
-  /* ── COUNTDOWN PULSE ── */
-  .countdown-num { transition: transform 0.2s ease; font-variant-numeric: tabular-nums; }
-  .countdown-num.pulse { transform: scale(1.06); }
+/* ── COUNTDOWN PULSE ── */
+.countdown-num { transition: transform 0.2s ease; font-variant-numeric: tabular-nums; }
+.countdown-num.pulse { transform: scale(1.06); }
 
-  /* ── SCROLL DOWN INDICATOR ── */
-  .scroll-indicator {
-    position: absolute; bottom: 30px; left: 50%;
-    transform: translateX(-50%); z-index: 2;
-    color: var(--navy); opacity: 0.55;
-    animation: scrollBounce 2s infinite;
-    text-decoration: none;
-  }
-  @keyframes scrollBounce {
-    0%, 100% { transform: translateX(-50%) translateY(0); }
-    50%      { transform: translateX(-50%) translateY(-8px); }
-  }
+/* ── SCROLL DOWN INDICATOR ── */
+.scroll-indicator {
+position: absolute; bottom: 30px; left: 50%;
+transform: translateX(-50%); z-index: 2;
+color: var(–navy); opacity: 0.55;
+animation: scrollBounce 2s infinite;
+text-decoration: none;
+}
+@keyframes scrollBounce {
+0%, 100% { transform: translateX(-50%) translateY(0); }
+50%      { transform: translateX(-50%) translateY(-8px); }
+}
 
-  /* ── RSVP BUTTON UPGRADE ── */
-  .rsvp-btn-new {
-    display: inline-block;
-    background: linear-gradient(135deg, var(--sunset) 0%, #d4af37 100%);
-    color: var(--navy);
-    font-family: 'Libre Baskerville', serif;
-    font-size: 14px; letter-spacing: 0.18em;
-    text-transform: uppercase; text-decoration: none;
-    padding: 18px 44px; border-radius: 40px;
-    font-weight: 700;
-    transition: all 0.3s ease;
-    box-shadow: 0 6px 24px rgba(244,201,138,0.4);
-  }
-  .rsvp-btn-new:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 32px rgba(244,201,138,0.55);
-  }
+/* ── RSVP BUTTON UPGRADE ── */
+.rsvp-btn-new {
+display: inline-block;
+background: linear-gradient(135deg, var(–sunset) 0%, #d4af37 100%);
+color: var(–navy);
+font-family: ‘Libre Baskerville’, serif;
+font-size: 14px; letter-spacing: 0.18em;
+text-transform: uppercase; text-decoration: none;
+padding: 18px 44px; border-radius: 40px;
+font-weight: 700;
+transition: all 0.3s ease;
+box-shadow: 0 6px 24px rgba(244,201,138,0.4);
+}
+.rsvp-btn-new:hover {
+transform: translateY(-3px);
+box-shadow: 0 10px 32px rgba(244,201,138,0.55);
+}
 
-  /* ── BACK TO TOP ── */
-  .back-to-top {
-    display: inline-flex; align-items: center; gap: 8px;
-    margin-top: 24px;
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.2);
-    color: white; padding: 10px 20px;
-    border-radius: 30px;
-    font-family: 'Libre Baskerville', serif;
-    font-size: 11px; letter-spacing: 0.15em;
-    text-transform: uppercase; text-decoration: none;
-    transition: all 0.3s ease;
-  }
-  .back-to-top:hover {
-    background: rgba(255,255,255,0.15);
-    transform: translateY(-2px);
-  }
+/* ── BACK TO TOP ── */
+.back-to-top {
+display: inline-flex; align-items: center; gap: 8px;
+margin-top: 24px;
+background: rgba(255,255,255,0.08);
+border: 1px solid rgba(255,255,255,0.2);
+color: white; padding: 10px 20px;
+border-radius: 30px;
+font-family: ‘Libre Baskerville’, serif;
+font-size: 11px; letter-spacing: 0.15em;
+text-transform: uppercase; text-decoration: none;
+transition: all 0.3s ease;
+}
+.back-to-top:hover {
+background: rgba(255,255,255,0.15);
+transform: translateY(-2px);
+}
 
-  /* ── REDUCED MOTION ── */
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-      scroll-behavior: auto !important;
-    }
-  }
+/* ── REDUCED MOTION ── */
+@media (prefers-reduced-motion: reduce) {
+*, *::before, *::after {
+animation-duration: 0.01ms !important;
+animation-iteration-count: 1 !important;
+transition-duration: 0.01ms !important;
+scroll-behavior: auto !important;
+}
+}
 
-  /* ── PRINT STYLES ── */
-  @media print {
-    nav, .lang-bar, .scroll-progress, .scroll-indicator, .cta-btn, .rsvp-btn-new, .back-to-top { display: none !important; }
-    body { background: white; color: black; }
-    #hero { min-height: auto; }
-    #rsvp { background: white !important; color: black !important; box-shadow: none; }
-    #rsvp * { color: black !important; }
-    .info-card { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
-    .faq-item .faq-a { max-height: none !important; opacity: 1 !important; padding-top: 12px !important; }
-  }
+/* ── PRINT STYLES ── */
+@media print {
+nav, .lang-bar, .scroll-progress, .scroll-indicator, .cta-btn, .rsvp-btn-new, .back-to-top { display: none !important; }
+body { background: white; color: black; }
+#hero { min-height: auto; }
+#rsvp { background: white !important; color: black !important; box-shadow: none; }
+#rsvp * { color: black !important; }
+.info-card { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+.faq-item .faq-a { max-height: none !important; opacity: 1 !important; padding-top: 12px !important; }
+}
 
-  /* ── FOOTER STRONG GOLD GRADIENT ── */
-  footer strong {
-    background: linear-gradient(135deg, white 0%, var(--sunset) 100%);
-    -webkit-background-clip: text; background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
+/* ── FOOTER STRONG GOLD GRADIENT ── */
+footer strong {
+background: linear-gradient(135deg, white 0%, var(–sunset) 100%);
+-webkit-background-clip: text; background-clip: text;
+-webkit-text-fill-color: transparent;
+}
 
-  /* ── 50 GOLD GRADIENT ── */
-  .hero-50 {
-    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
-    -webkit-background-clip: text; background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
+/* ── 50 GOLD GRADIENT ── */
+.hero-50 {
+background: linear-gradient(135deg, var(–navy) 0%, var(–navy-mid) 100%);
+-webkit-background-clip: text; background-clip: text;
+-webkit-text-fill-color: transparent;
+}
 
 </style>
 </head>
@@ -469,12 +541,14 @@
 <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
 
 <!-- LANG -->
+
 <div class="lang-bar">
   <button class="lang-btn active" onclick="setLang('en')">EN</button>
   <button class="lang-btn" onclick="setLang('fr')">FR</button>
 </div>
 
 <!-- NAV -->
+
 <nav id="main-nav" aria-label="Main navigation">
   <a href="#programme" data-en>Programme</a>
   <a href="#programme" data-fr>Programme</a>
@@ -487,6 +561,7 @@
 </nav>
 
 <!-- HERO - day to night transition -->
+
 <style>
   /* ── HERO — TRANSITION JOUR → NUIT ── */
   #hero {
@@ -880,14 +955,27 @@
     color: white;
     font-family: 'Libre Baskerville', serif;
     font-size: 13px;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
     text-decoration: none;
     font-weight: 700;
-    padding: 16px 42px;
+    padding: 16px 32px;
     border-radius: 40px;
     transition: all 0.3s ease, background 3s ease-in-out, box-shadow 3s ease-in-out;
     box-shadow: 0 4px 20px rgba(26,46,74,0.3);
+    max-width: 90vw;
+    white-space: nowrap;
+    box-sizing: border-box;
+  }
+  /* En FR le texte est plus long → on serre */
+  body.fr .hero-cta {
+    padding: 16px 24px;
+    letter-spacing: 0.1em;
+    font-size: 12px;
+  }
+  @media (max-width: 480px) {
+    .hero-cta { padding: 14px 24px; font-size: 12px; letter-spacing: 0.12em; }
+    body.fr .hero-cta { padding: 14px 18px; font-size: 11px; letter-spacing: 0.06em; }
   }
   .hero-cta:hover {
     background: var(--navy-mid);
@@ -934,12 +1022,15 @@
   <div class="hero-layer hero-night" aria-hidden="true"></div>
 
   <!-- Soleil -->
+
   <div class="hero-sun" aria-hidden="true"></div>
 
   <!-- Lune -->
+
   <div class="hero-moon" aria-hidden="true"></div>
 
   <!-- Étoiles -->
+
   <div class="hero-stars" aria-hidden="true">
     <div class="star big"></div>
     <div class="star"></div>
@@ -956,15 +1047,19 @@
   </div>
 
   <!-- Silhouette montagnes -->
+
   <div class="hero-mountains" aria-hidden="true"></div>
 
   <!-- Reflets eau -->
+
   <div class="hero-shimmer" aria-hidden="true"></div>
 
   <!-- Reflet de lune sur l'eau -->
+
   <div class="hero-moon-reflect" aria-hidden="true"></div>
 
   <!-- Confetti dorés -->
+
   <div class="hero-confetti" aria-hidden="true">
     <div class="confetti-piece"></div>
     <div class="confetti-piece"></div>
@@ -978,36 +1073,41 @@
   </div>
 
   <!-- Bouton toggle jour/nuit (manuel) -->
+
   <button class="hero-toggle" id="hero-toggle" type="button" aria-label="Toggle day/night">
     <span id="toggle-icon">🌙</span>
   </button>
 
   <!-- Contenu -->
+
   <div class="hero-content-new">
     <div class="hero-pretitle" data-en>You are invited to celebrate</div>
     <div class="hero-pretitle" data-fr>Venez célébrer</div>
 
-    <div class="hero-names-new">Cécile <span class="hero-amp">&amp;</span> Marie</div>
+```
+<div class="hero-names-new">Cécile <span class="hero-amp">&amp;</span> Marie</div>
 
-    <div class="hero-50-wrap">
-      <span class="sparkle" aria-hidden="true">✦</span>
-      <span class="sparkle" aria-hidden="true">✧</span>
-      <span class="sparkle" aria-hidden="true">✦</span>
-      <span class="sparkle" aria-hidden="true">✧</span>
-      <div class="hero-50-new">50</div>
-    </div>
+<div class="hero-50-wrap">
+  <span class="sparkle" aria-hidden="true">✦</span>
+  <span class="sparkle" aria-hidden="true">✧</span>
+  <span class="sparkle" aria-hidden="true">✦</span>
+  <span class="sparkle" aria-hidden="true">✧</span>
+  <div class="hero-50-new">50</div>
+</div>
 
-    <div class="hero-celebrate" data-en>years of life, friendship &amp; laughter</div>
-    <div class="hero-celebrate" data-fr>ans de vie, d'amitié et de rires</div>
+<div class="hero-celebrate" data-en>years of life, friendship &amp; laughter</div>
+<div class="hero-celebrate" data-fr>ans de vie, d'amitié et de rires</div>
 
-    <div class="hero-divider" aria-hidden="true"></div>
+<div class="hero-divider" aria-hidden="true"></div>
 
-    <div class="hero-date-new" data-en>Saturday, August 29, 2026</div>
-    <div class="hero-date-new" data-fr>Samedi 29 août 2026</div>
-    <div class="hero-location-new">Port-Gitana, Bellevue — Maison Lerina</div>
+<div class="hero-date-new" data-en>Saturday, August 29, 2026</div>
+<div class="hero-date-new" data-fr>Samedi 29 août 2026</div>
+<div class="hero-location-new">Port-Gitana, Bellevue — Maison Lerina</div>
 
-    <a href="#rsvp" class="hero-cta" data-en>RSVP Now</a>
-    <a href="#rsvp" class="hero-cta" data-fr>Confirmer ma présence</a>
+<a href="#rsvp" class="hero-cta" data-en>RSVP Now</a>
+<a href="#rsvp" class="hero-cta" data-fr>Confirmer ma présence</a>
+```
+
   </div>
 
   <a href="#countdown-section" class="scroll-indicator" aria-label="Scroll down">
@@ -1063,7 +1163,8 @@
 </script>
 
 <!-- COUNTDOWN -->
-<div id="countdown-section" style="background-image: radial-gradient(ellipse at top, rgba(244,201,138,0.08) 0%, transparent 60%);">
+
+<div id="countdown-section">
   <div class="section-label" data-en>Time until the celebration</div>
   <div class="section-label" data-fr>Compte à rebours</div>
   <div class="countdown-row">
@@ -1075,118 +1176,127 @@
 </div>
 
 <!-- WAVE -->
+
 <div class="wave"><svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,30 C360,60 720,0 1080,30 C1260,45 1380,20 1440,30 L1440,60 L0,60 Z" fill="#f4f0e8"/></svg></div>
 
 <!-- PROGRAMME -->
-<section id="programme" style="padding:80px 20px; max-width:860px; margin:0 auto;">
+
+<section id="programme" style="background:var(--sand);padding:100px 24px 110px;max-width:920px;margin:0 auto;color:var(--ink);">
   <h2 class="section-title" data-en>The Day</h2>
   <h2 class="section-title" data-fr>Le Programme</h2>
   <div class="timeline">
 
-    <div class="tl-item">
-      <div class="tl-time">13:00</div>
-      <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
-      <div class="tl-body">
-        <div class="tl-event" data-en>Welcome Lunch</div>
-        <div class="tl-event" data-fr>Déjeuner de bienvenue</div>
-        <div class="tl-desc" data-en>Arrive when you're ready — a relaxed lunch with food and drinks. Come as you are, no dress code!</div>
-        <div class="tl-desc" data-fr>Arrivez quand vous voulez — un déjeuner décontracté. Venez comme vous êtes, pas de dress code !</div>
-      </div>
-    </div>
+```
+<div class="tl-item">
+  <div class="tl-time">13:00</div>
+  <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+  <div class="tl-body">
+    <div class="tl-event" data-en>Welcome Lunch</div>
+    <div class="tl-event" data-fr>Déjeuner de bienvenue</div>
+    <div class="tl-desc" data-en>Arrive when you're ready — a relaxed lunch with food and drinks. Come as you are, no dress code!</div>
+    <div class="tl-desc" data-fr>Arrivez quand vous voulez — un déjeuner décontracté. Venez comme vous êtes, pas de dress code !</div>
+  </div>
+</div>
 
-    <div class="tl-item">
-      <div class="tl-time">15:00</div>
-      <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
-      <div class="tl-body">
-        <div class="tl-event" data-en>Free Afternoon ☀️</div>
-        <div class="tl-event" data-fr>Après-midi libre ☀️</div>
-        <div class="tl-desc" data-en>The beach is yours — swim, sunbathe, chat, relax. Bring your swimsuit, sunscreen, towel, shower gel, inflatable and beach toys. Showers, changing rooms and lockers on site so you can freshen up before the evening.</div>
-        <div class="tl-desc" data-fr>La plage est à vous — baignez-vous, bronzez, discutez, relaxez. Apportez maillot, crème solaire, serviette, gel douche, bouée et jouets de plage. Douches, vestiaires et casiers sur place pour vous préparer pour la soirée.</div>
-      </div>
-    </div>
+<div class="tl-item">
+  <div class="tl-time">15:00</div>
+  <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+  <div class="tl-body">
+    <div class="tl-event" data-en>Free Afternoon ☀️</div>
+    <div class="tl-event" data-fr>Après-midi libre ☀️</div>
+    <div class="tl-desc" data-en>The beach is yours — swim, sunbathe, chat, relax. Bring your swimsuit, sunscreen, towel, shower gel, inflatable and beach toys. Showers, changing rooms and lockers on site so you can freshen up before the evening.</div>
+    <div class="tl-desc" data-fr>La plage est à vous — baignez-vous, bronzez, discutez, relaxez. Apportez maillot, crème solaire, serviette, gel douche, bouée et jouets de plage. Douches, vestiaires et casiers sur place pour vous préparer pour la soirée.</div>
+  </div>
+</div>
 
-    <div class="tl-item">
-      <div class="tl-time">18:30</div>
-      <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
-      <div class="tl-body">
-        <div class="tl-event" data-en>The Party Begins 🎉</div>
-        <div class="tl-event" data-fr>La Fête commence 🎉</div>
-        <div class="tl-desc" data-en>Time to get dressed up! The evening kicks off — expect food, live music, dancing, DJs, cake and laughter all the way until 1:30–2:00 AM. (The venue closes then — but what a night it'll be!)</div>
-        <div class="tl-desc" data-fr>Place à la tenue de soirée ! Ambiance debout — food, musique live, danse, DJs, gâteau et rires jusqu'à 1h30–2h00. (Nous devons libérer le lieu — mais quelle nuit en perspective !)</div>
-      </div>
-    </div>
+<div class="tl-item">
+  <div class="tl-time">18:30</div>
+  <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+  <div class="tl-body">
+    <div class="tl-event" data-en>The Party Begins 🎉</div>
+    <div class="tl-event" data-fr>La Fête commence 🎉</div>
+    <div class="tl-desc" data-en>Time to get dressed up! The evening kicks off — expect food, live music, dancing, DJs, cake and laughter all the way until 1:30–2:00 AM. (The venue closes then — but what a night it'll be!)</div>
+    <div class="tl-desc" data-fr>Place à la tenue de soirée ! Ambiance debout — food, musique live, danse, DJs, gâteau et rires jusqu'à 1h30–2h00. (Nous devons libérer le lieu — mais quelle nuit en perspective !)</div>
+  </div>
+</div>
 
-    <div class="tl-item">
-      <div class="tl-time">01:30</div>
-      <div class="tl-dot-col"><div class="tl-dot"></div></div>
-      <div class="tl-body">
-        <div class="tl-event" data-en>Good night… 🌙</div>
-        <div class="tl-event" data-fr>Bonne nuit… 🌙</div>
-        <div class="tl-desc" data-en>The venue closes — but the memories last forever.</div>
-        <div class="tl-desc" data-fr>Le lieu ferme ses portes — mais les souvenirs restent pour toujours.</div>
-      </div>
-    </div>
+<div class="tl-item">
+  <div class="tl-time">01:30</div>
+  <div class="tl-dot-col"><div class="tl-dot"></div></div>
+  <div class="tl-body">
+    <div class="tl-event" data-en>Good night… 🌙</div>
+    <div class="tl-event" data-fr>Bonne nuit… 🌙</div>
+    <div class="tl-desc" data-en>The venue closes — but the memories last forever.</div>
+    <div class="tl-desc" data-fr>Le lieu ferme ses portes — mais les souvenirs restent pour toujours.</div>
+  </div>
+</div>
+```
 
   </div>
 </section>
 
 <!-- WAVE 2 -->
+
 <div class="wave" style="background:#f4f0e8"><svg viewBox="0 0 1440 40" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,20 C480,40 960,0 1440,20 L1440,40 L0,40 Z" fill="#edf5f8"/></svg></div>
 
 <!-- PRACTICAL INFO -->
-<div style="background:#edf5f8; padding:10px 0 60px;">
-<section id="infos" style="max-width:900px; padding-top:60px; margin:0 auto; padding-left:20px; padding-right:20px;">
+
+<div style="background:var(--sand); padding:10px 0 60px;">
+<section id="infos" style="max-width:1080px;padding:60px 0 0;margin:0 auto;">
   <h2 class="section-title" data-en>Practical Info</h2>
   <h2 class="section-title" data-fr>Infos Pratiques</h2>
   <div class="info-grid">
 
-    <div class="info-card">
-      <div class="info-icon">📍</div>
-      <h3 data-en>Venue</h3><h3 data-fr>Lieu</h3>
-      <p data-en>Maison Lerina, Port-Gitana<br>Route de Lausanne<br>1293 Bellevue, Geneva<br>Right on the shores of Lake Geneva.<br><br><a href="https://maps.google.com/?q=Maison+Lerina+Port-Gitana+Bellevue+Geneva" target="_blank">Open in Maps →</a></p>
-      <p data-fr>Maison Lerina, Port-Gitana<br>Route de Lausanne<br>1293 Bellevue, Genève<br>Au bord du lac Léman.<br><br><a href="https://maps.google.com/?q=Maison+Lerina+Port-Gitana+Bellevue+Geneve" target="_blank">Voir sur Maps →</a></p>
-    </div>
+```
+<div class="info-card">
+  <div class="info-icon">📍</div>
+  <h3 data-en>Venue</h3><h3 data-fr>Lieu</h3>
+  <p data-en>Maison Lerina, Port-Gitana<br>Route de Lausanne<br>1293 Bellevue, Geneva<br>Right on the shores of Lake Geneva.<br><br><a href="https://maps.google.com/?q=Maison+Lerina+Port-Gitana+Bellevue+Geneva" target="_blank">Open in Maps →</a></p>
+  <p data-fr>Maison Lerina, Port-Gitana<br>Route de Lausanne<br>1293 Bellevue, Genève<br>Au bord du lac Léman.<br><br><a href="https://maps.google.com/?q=Maison+Lerina+Port-Gitana+Bellevue+Geneve" target="_blank">Voir sur Maps →</a></p>
+</div>
 
-    <div class="info-card">
-      <div class="info-icon">🚗</div>
-      <h3 data-en>Getting There</h3><h3 data-fr>Comment venir</h3>
-      <p data-en>By car: 10 min from Geneva centre. Nearest parking: <strong>Parking Gitana</strong> (5 min walk, first 90 min free) — fills up fast on weekends, carpooling strongly recommended.<br><br>By train: <strong>Genthod-Bellevue</strong> station is a 6-minute walk from the venue. From there, it's 13 minutes by train to <strong>Cornavin</strong> — Geneva's main station.<br><br>By bus: Line 52, stop <em>Bellevue Mairie</em>.</p>
-      <p data-fr>En voiture : 10 min du centre. Parking le plus proche : <strong>Parking Gitana</strong> (5 min à pied, 90 premières min gratuites) — se remplit vite, covoiturage fortement recommandé.<br><br>En train : la gare de <strong>Genthod-Bellevue</strong> est à 6 min à pied du lieu. De là, 13 min en train jusqu'à <strong>Cornavin</strong> — la gare principale de Genève.<br><br>En bus : Ligne 52, arrêt <em>Bellevue Mairie</em>.</p>
-    </div>
+<div class="info-card">
+  <div class="info-icon">🚗</div>
+  <h3 data-en>Getting There</h3><h3 data-fr>Comment venir</h3>
+  <p data-en>By car: 10 min from Geneva centre. Nearest parking: <strong>Parking Gitana</strong> (5 min walk, first 90 min free) — fills up fast on weekends, carpooling strongly recommended.<br><br>By train: <strong>Genthod-Bellevue</strong> station is a 6-minute walk from the venue. From there, it's 13 minutes by train to <strong>Cornavin</strong> — Geneva's main station.<br><br>By bus: Line 52, stop <em>Bellevue Mairie</em>.</p>
+  <p data-fr>En voiture : 10 min du centre. Parking le plus proche : <strong>Parking Gitana</strong> (5 min à pied, 90 premières min gratuites) — se remplit vite, covoiturage fortement recommandé.<br><br>En train : la gare de <strong>Genthod-Bellevue</strong> est à 6 min à pied du lieu. De là, 13 min en train jusqu'à <strong>Cornavin</strong> — la gare principale de Genève.<br><br>En bus : Ligne 52, arrêt <em>Bellevue Mairie</em>.</p>
+</div>
 
-    <div class="info-card">
-      <div class="info-icon">🏨</div>
-      <h3 data-en>Accommodation</h3><h3 data-fr>Hébergement</h3>
-      <p data-en><strong>Auberge de Port-Gitana</strong> — next door<br><strong>Hôtel Kutchi</strong> — across the street<br><strong>Lake Geneva Hotel</strong> — nearby Versoix<br><br>Geneva city centre: 13 min by train from Genthod-Bellevue.<br><br>🇫🇷 Options also available across the border in France (Ferney-Voltaire, Divonne-les-Bains) — note this requires a car.<br><br>Book early — August fills up fast!</p>
-      <p data-fr><strong>Auberge de Port-Gitana</strong> — juste à côté<br><strong>Hôtel Kutchi</strong> — en face<br><strong>Lake Geneva Hotel</strong> — à Versoix<br><br>Centre de Genève : 13 min en train depuis Genthod-Bellevue.<br><br>🇫🇷 Des options disponibles côté France (Ferney-Voltaire, Divonne-les-Bains) — attention, cela nécessite une voiture.<br><br>Réservez tôt — août se remplit vite !</p>
-    </div>
+<div class="info-card">
+  <div class="info-icon">🏨</div>
+  <h3 data-en>Accommodation</h3><h3 data-fr>Hébergement</h3>
+  <p data-en><strong>Auberge de Port-Gitana</strong> — next door<br><strong>Hôtel Kutchi</strong> — across the street<br><strong>Lake Geneva Hotel</strong> — nearby Versoix<br><br>Geneva city centre: 13 min by train from Genthod-Bellevue.<br><br>🇫🇷 Options also available across the border in France (Ferney-Voltaire, Divonne-les-Bains) — note this requires a car.<br><br>Book early — August fills up fast!</p>
+  <p data-fr><strong>Auberge de Port-Gitana</strong> — juste à côté<br><strong>Hôtel Kutchi</strong> — en face<br><strong>Lake Geneva Hotel</strong> — à Versoix<br><br>Centre de Genève : 13 min en train depuis Genthod-Bellevue.<br><br>🇫🇷 Des options disponibles côté France (Ferney-Voltaire, Divonne-les-Bains) — attention, cela nécessite une voiture.<br><br>Réservez tôt — août se remplit vite !</p>
+</div>
 
-    <div class="info-card">
-      <div class="info-icon">🥂</div>
-      <h3 data-en>Food &amp; Drinks</h3><h3 data-fr>Repas &amp; Boissons</h3>
-      <p data-en>Food and drinks are fully taken care of — welcome lunch, aperitif, wines and everything you need to celebrate. No need to bring anything!</p>
-      <p data-fr>Repas et boissons entièrement pris en charge — déjeuner, apéritif, vins et tout ce qu'il faut pour fêter ça. Pas besoin d'apporter quoi que ce soit !</p>
-    </div>
+<div class="info-card">
+  <div class="info-icon">🥂</div>
+  <h3 data-en>Food &amp; Drinks</h3><h3 data-fr>Repas &amp; Boissons</h3>
+  <p data-en>Food and drinks are fully taken care of — welcome lunch, aperitif, wines and everything you need to celebrate. No need to bring anything!</p>
+  <p data-fr>Repas et boissons entièrement pris en charge — déjeuner, apéritif, vins et tout ce qu'il faut pour fêter ça. Pas besoin d'apporter quoi que ce soit !</p>
+</div>
 
-    <div class="info-card">
-      <div class="info-icon">🏊</div>
-      <h3 data-en>Beach &amp; Swimming</h3><h3 data-fr>Plage &amp; Baignade</h3>
-      <p data-en>The venue is right on the beach! Swim from the afternoon until midnight. Bring your swimsuit, sunscreen, towel, shower gel, inflatable and beach toys. Showers, changing rooms and lockers on site.</p>
-      <p data-fr>Le lieu est directement sur la plage ! Baignade possible de l'après-midi jusqu'à minuit. Apportez maillot, crème solaire, serviette, gel douche, bouée et jouets. Douches, vestiaires et casiers sur place.</p>
-    </div>
+<div class="info-card">
+  <div class="info-icon">🏊</div>
+  <h3 data-en>Beach &amp; Swimming</h3><h3 data-fr>Plage &amp; Baignade</h3>
+  <p data-en>The venue is right on the beach! Swim from the afternoon until midnight. Bring your swimsuit, sunscreen, towel, shower gel, inflatable and beach toys. Showers, changing rooms and lockers on site.</p>
+  <p data-fr>Le lieu est directement sur la plage ! Baignade possible de l'après-midi jusqu'à minuit. Apportez maillot, crème solaire, serviette, gel douche, bouée et jouets. Douches, vestiaires et casiers sur place.</p>
+</div>
 
-    <div class="info-card">
-      <div class="info-icon">👶</div>
-      <h3 data-en>Children</h3><h3 data-fr>Enfants</h3>
-      <p data-en>Local children are welcome for the afternoon (13h–18h30); for the late evening we suggest a babysitter. Guests travelling from afar — little ones are welcome all night!</p>
-      <p data-fr>Les enfants locaux sont bienvenus pour l'après-midi (13h–18h30) ; pour la soirée tardive, nous recommandons une baby-sitter. Pour les invités venant de loin — les enfants sont bienvenus toute la nuit !</p>
-    </div>
+<div class="info-card">
+  <div class="info-icon">👶</div>
+  <h3 data-en>Children</h3><h3 data-fr>Enfants</h3>
+  <p data-en>Local children (under 12) are welcome for the afternoon (13h–18h30); for the late evening we suggest a babysitter. Guests travelling from afar — little ones are welcome all night!</p>
+  <p data-fr>Les enfants locaux (moins de 12 ans) sont bienvenus pour l'après-midi (13h–18h30) ; pour la soirée tardive, nous recommandons une baby-sitter. Pour les invités venant de loin — les enfants sont bienvenus toute la nuit !</p>
+</div>
+```
 
   </div>
 </section>
 </div>
 
 <!-- DRESS CODE -->
+
 <section id="dresscode" style="max-width:900px; padding:60px 20px; margin:0 auto;">
   <div style="background:linear-gradient(135deg,#fdf8ee 0%,#fff9f0 100%);border-radius:24px;padding:52px 40px;text-align:center;border:1px solid rgba(212,175,55,0.2);">
     <h2 class="section-title" data-en>Dress Code</h2>
@@ -1207,149 +1317,157 @@
 </section>
 
 <!-- FAQ -->
-<div style="background:#f4f0e8;padding:10px 0 60px;">
+
+<div style="background:var(--paper);padding:90px 0;border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline);">
 <section id="faq" style="max-width:860px;padding:60px 20px 0;margin:0 auto;">
   <h2 class="section-title" data-en>Questions</h2>
   <h2 class="section-title" data-fr>Questions</h2>
   <div class="faq-list">
 
-    <div class="faq-item">
-      <div class="faq-q" data-en>⏰ When does the party start and end?</div>
-      <div class="faq-q" data-fr>⏰ À quelle heure commence et se termine la fête ?</div>
-      <div class="faq-a" data-en>All timing details are in the <a href="#programme" style="color:var(--lake-deep)">Programme →</a></div>
-      <div class="faq-a" data-fr>Tous les détails horaires sont dans le <a href="#programme" style="color:var(--lake-deep)">Programme →</a></div>
-    </div>
+```
+<div class="faq-item">
+  <div class="faq-q" data-en>⏰ When does the party start and end?</div>
+  <div class="faq-q" data-fr>⏰ À quelle heure commence et se termine la fête ?</div>
+  <div class="faq-a" data-en>All timing details are in the <a href="#programme" style="color:var(--lake-deep)">Programme →</a></div>
+  <div class="faq-a" data-fr>Tous les détails horaires sont dans le <a href="#programme" style="color:var(--lake-deep)">Programme →</a></div>
+</div>
 
-    <div class="faq-item">
-      <div class="faq-q" data-en>📍 Where exactly is the venue?</div>
-      <div class="faq-q" data-fr>📍 Où se trouve exactement le lieu ?</div>
-      <div class="faq-a" data-en>The party takes place at <strong>Maison Lerina</strong>, Port-Gitana, Route de Lausanne, 1293 Bellevue — right on the shores of Lake Geneva.</div>
-      <div class="faq-a" data-fr>La fête se tient à la <strong>Maison Lerina</strong>, Port-Gitana, Route de Lausanne, 1293 Bellevue — au bord du lac Léman.</div>
-    </div>
+<div class="faq-item">
+  <div class="faq-q" data-en>📍 Where exactly is the venue?</div>
+  <div class="faq-q" data-fr>📍 Où se trouve exactement le lieu ?</div>
+  <div class="faq-a" data-en>The party takes place at <strong>Maison Lerina</strong>, Port-Gitana, Route de Lausanne, 1293 Bellevue — right on the shores of Lake Geneva.</div>
+  <div class="faq-a" data-fr>La fête se tient à la <strong>Maison Lerina</strong>, Port-Gitana, Route de Lausanne, 1293 Bellevue — au bord du lac Léman.</div>
+</div>
 
-    <div class="faq-item">
-      <div class="faq-q" data-en>🚗 Is there parking nearby?</div>
-      <div class="faq-q" data-fr>🚗 Y a-t-il un parking à proximité ?</div>
-      <div class="faq-a" data-en>No dedicated parking on site. The nearest public car park is <strong>Parking Gitana</strong> (5 min walk, 143 spaces, first 90 min free) — but it fills up fast on summer weekends. We strongly recommend carpooling or public transport.</div>
-      <div class="faq-a" data-fr>Pas de parking direct sur place. Le parking public le plus proche est le <strong>Parking Gitana</strong> (5 min à pied, 143 places, 90 premières min gratuites) — mais il se remplit vite les weekends d'été. Nous recommandons fortement le covoiturage ou les transports en commun.</div>
-    </div>
+<div class="faq-item">
+  <div class="faq-q" data-en>🚗 Is there parking nearby?</div>
+  <div class="faq-q" data-fr>🚗 Y a-t-il un parking à proximité ?</div>
+  <div class="faq-a" data-en>No dedicated parking on site. The nearest public car park is <strong>Parking Gitana</strong> (5 min walk, 143 spaces, first 90 min free) — but it fills up fast on summer weekends. We strongly recommend carpooling or public transport.</div>
+  <div class="faq-a" data-fr>Pas de parking direct sur place. Le parking public le plus proche est le <strong>Parking Gitana</strong> (5 min à pied, 143 places, 90 premières min gratuites) — mais il se remplit vite les weekends d'été. Nous recommandons fortement le covoiturage ou les transports en commun.</div>
+</div>
 
-    <div class="faq-item">
-      <div class="faq-q" data-en>🚌 How do I get there by public transport?</div>
-      <div class="faq-q" data-fr>🚌 Comment venir en transports en commun ?</div>
-      <div class="faq-a" data-en>Bus 52 (stop <em>Bellevue Mairie</em>) or train to <strong>Genthod-Bellevue</strong> station — just a 6-minute walk from the venue. From Genthod-Bellevue, it's 13 minutes by train to <strong>Cornavin</strong> — Geneva's main station.</div>
-      <div class="faq-a" data-fr>Bus 52 (arrêt <em>Bellevue Mairie</em>) ou train jusqu'à la gare de <strong>Genthod-Bellevue</strong> — à 6 minutes à pied du lieu. De Genthod-Bellevue, comptez 13 minutes en train jusqu'à <strong>Cornavin</strong> — la gare principale de Genève.</div>
-    </div>
+<div class="faq-item">
+  <div class="faq-q" data-en>🚌 How do I get there by public transport?</div>
+  <div class="faq-q" data-fr>🚌 Comment venir en transports en commun ?</div>
+  <div class="faq-a" data-en>Bus 52 (stop <em>Bellevue Mairie</em>) or train to <strong>Genthod-Bellevue</strong> station — just a 6-minute walk from the venue. From Genthod-Bellevue, it's 13 minutes by train to <strong>Cornavin</strong> — Geneva's main station.</div>
+  <div class="faq-a" data-fr>Bus 52 (arrêt <em>Bellevue Mairie</em>) ou train jusqu'à la gare de <strong>Genthod-Bellevue</strong> — à 6 minutes à pied du lieu. De Genthod-Bellevue, comptez 13 minutes en train jusqu'à <strong>Cornavin</strong> — la gare principale de Genève.</div>
+</div>
 
-    <div class="faq-item">
-      <div class="faq-q" data-en>🏊 Can I swim in the lake?</div>
-      <div class="faq-q" data-fr>🏊 Peut-on se baigner dans le lac ?</div>
-      <div class="faq-a" data-en>Absolutely! The venue is right on the beach — you can swim from the afternoon all the way into the evening, even until midnight. Showers, changing rooms and lockers are available on site so you can easily switch from beach to party mode.</div>
-      <div class="faq-a" data-fr>Absolument ! Le lieu est directement sur la plage — vous pouvez vous baigner de l'après-midi jusque tard dans la soirée, même jusqu'à minuit. Douches, vestiaires et casiers sont disponibles sur place pour passer facilement de la plage à la fête.</div>
-    </div>
+<div class="faq-item">
+  <div class="faq-q" data-en>🏊 Can I swim in the lake?</div>
+  <div class="faq-q" data-fr>🏊 Peut-on se baigner dans le lac ?</div>
+  <div class="faq-a" data-en>Absolutely! The venue is right on the beach — you can swim from the afternoon all the way into the evening, even until midnight. Showers, changing rooms and lockers are available on site so you can easily switch from beach to party mode.</div>
+  <div class="faq-a" data-fr>Absolument ! Le lieu est directement sur la plage — vous pouvez vous baigner de l'après-midi jusque tard dans la soirée, même jusqu'à minuit. Douches, vestiaires et casiers sont disponibles sur place pour passer facilement de la plage à la fête.</div>
+</div>
 
-    <div class="faq-item">
-      <div class="faq-q" data-en>👗 What should I wear?</div>
-      <div class="faq-q" data-fr>👗 Quel est le dress code ?</div>
-      <div class="faq-a" data-en>All details in the <a href="#dresscode" style="color:var(--lake-deep)">Dress Code section →</a>. Note: no dress code for the lunch — come as you are!</div>
-      <div class="faq-a" data-fr>Tous les détails dans la <a href="#dresscode" style="color:var(--lake-deep)">section Dress Code →</a>. À noter : pas de dress code pour le déjeuner — venez comme vous êtes !</div>
-    </div>
+<div class="faq-item">
+  <div class="faq-q" data-en>👗 What should I wear?</div>
+  <div class="faq-q" data-fr>👗 Quel est le dress code ?</div>
+  <div class="faq-a" data-en>All details in the <a href="#dresscode" style="color:var(--lake-deep)">Dress Code section →</a>. Note: no dress code for the lunch — come as you are!</div>
+  <div class="faq-a" data-fr>Tous les détails dans la <a href="#dresscode" style="color:var(--lake-deep)">section Dress Code →</a>. À noter : pas de dress code pour le déjeuner — venez comme vous êtes !</div>
+</div>
 
-    <div class="faq-item">
-      <div class="faq-q" data-en>🍽️ I have dietary restrictions — is that okay?</div>
-      <div class="faq-q" data-fr>🍽️ J'ai des restrictions alimentaires — c'est possible ?</div>
-      <div class="faq-a" data-en>Several options will be available to suit different diets. The catering team from <strong>Châteleine</strong> will be on hand to advise on allergens and dietary requirements.</div>
-      <div class="faq-a" data-fr>Plusieurs options seront proposées pour différents régimes. Le personnel du traiteur <strong>Châteleine</strong> sera présent pour vous renseigner sur les allergènes et restrictions alimentaires.</div>
-    </div>
+<div class="faq-item">
+  <div class="faq-q" data-en>🍽️ I have dietary restrictions — is that okay?</div>
+  <div class="faq-q" data-fr>🍽️ J'ai des restrictions alimentaires — c'est possible ?</div>
+  <div class="faq-a" data-en>Several options will be available to suit different diets. The catering team from <strong>Châteleine</strong> will be on hand to advise on allergens and dietary requirements.</div>
+  <div class="faq-a" data-fr>Plusieurs options seront proposées pour différents régimes. Le personnel du traiteur <strong>Châteleine</strong> sera présent pour vous renseigner sur les allergènes et restrictions alimentaires.</div>
+</div>
 
-    <div class="faq-item">
-      <div class="faq-q" data-en>🥂 Is food and drink included?</div>
-      <div class="faq-q" data-fr>🥂 Le repas et les boissons sont-ils inclus ?</div>
-      <div class="faq-a" data-en>Yes, everything is taken care of — welcome lunch, aperitif, wines and everything you need to celebrate. No need to bring anything!</div>
-      <div class="faq-a" data-fr>Oui, tout est pris en charge — déjeuner, apéritif, vins et tout ce qu'il faut pour fêter ça. Pas besoin d'apporter quoi que ce soit !</div>
-    </div>
+<div class="faq-item">
+  <div class="faq-q" data-en>🥂 Is food and drink included?</div>
+  <div class="faq-q" data-fr>🥂 Le repas et les boissons sont-ils inclus ?</div>
+  <div class="faq-a" data-en>Yes, everything is taken care of — welcome lunch, aperitif, wines and everything you need to celebrate. No need to bring anything!</div>
+  <div class="faq-a" data-fr>Oui, tout est pris en charge — déjeuner, apéritif, vins et tout ce qu'il faut pour fêter ça. Pas besoin d'apporter quoi que ce soit !</div>
+</div>
 
-    <div class="faq-item">
-      <div class="faq-q" data-en>👥 Can I bring a plus one?</div>
-      <div class="faq-q" data-fr>👥 Puis-je venir avec un·e invité·e ?</div>
-      <div class="faq-a" data-en>Attendance is based on your invitation. Please indicate the names of your guests in your <a href="#rsvp" style="color:var(--lake-deep)">RSVP →</a></div>
-      <div class="faq-a" data-fr>La présence est basée sur votre invitation. Indiquez les noms de vos invités dans votre <a href="#rsvp" style="color:var(--lake-deep)">RSVP →</a></div>
-    </div>
+<div class="faq-item">
+  <div class="faq-q" data-en>👥 Can I bring a plus one?</div>
+  <div class="faq-q" data-fr>👥 Puis-je venir avec un·e invité·e ?</div>
+  <div class="faq-a" data-en>Attendance is based on your invitation. Please indicate the names of your guests in your <a href="#rsvp" style="color:var(--lake-deep)">RSVP →</a></div>
+  <div class="faq-a" data-fr>La présence est basée sur votre invitation. Indiquez les noms de vos invités dans votre <a href="#rsvp" style="color:var(--lake-deep)">RSVP →</a></div>
+</div>
 
-    <div class="faq-item">
-      <div class="faq-q" data-en>👶 What about children?</div>
-      <div class="faq-q" data-fr>👶 Et les enfants ?</div>
-      <div class="faq-a" data-en>Local children are welcome for the afternoon (13h–18h30); for the late evening, we suggest arranging a babysitter. Guests travelling from afar — little ones are welcome all night long!</div>
-      <div class="faq-a" data-fr>Les enfants locaux sont bienvenus pour l'après-midi (13h–18h30) ; pour la soirée tardive, nous recommandons une baby-sitter. Pour les invités venant de loin — les enfants sont les bienvenus toute la nuit !</div>
-    </div>
+<div class="faq-item">
+  <div class="faq-q" data-en>👶 What about children?</div>
+  <div class="faq-q" data-fr>👶 Et les enfants ?</div>
+  <div class="faq-a" data-en>Local children (under 12) are welcome for the afternoon (13h–18h30); for the late evening, we suggest arranging a babysitter. Guests travelling from afar — little ones are welcome all night long!</div>
+  <div class="faq-a" data-fr>Les enfants locaux (moins de 12 ans) sont bienvenus pour l'après-midi (13h–18h30) ; pour la soirée tardive, nous recommandons une baby-sitter. Pour les invités venant de loin — les enfants sont les bienvenus toute la nuit !</div>
+</div>
 
-    <div class="faq-item">
-      <div class="faq-q" data-en>🏨 Any hotel recommendations nearby?</div>
-      <div class="faq-q" data-fr>🏨 Des hôtels à recommander ?</div>
-      <div class="faq-a" data-en>Several great options close by — <strong>Auberge de Port-Gitana</strong> is literally next door, <strong>Hôtel Kutchi</strong> is right across the street, and <strong>Lake Geneva Hotel</strong> is in nearby Versoix. Many more options in Geneva city centre, just 13 minutes by train from Genthod-Bellevue station. Also possible across the border in France (Ferney-Voltaire, Divonne-les-Bains) — note this requires a car. Book early — August fills up fast!</div>
-      <div class="faq-a" data-fr>Plusieurs bonnes options à proximité — l'<strong>Auberge de Port-Gitana</strong> est juste à côté, l'<strong>Hôtel Kutchi</strong> est en face, et le <strong>Lake Geneva Hotel</strong> est à Versoix. De nombreuses options en ville de Genève, à 13 min en train depuis Genthod-Bellevue. Également possible côté France (Ferney-Voltaire, Divonne-les-Bains) — attention, voiture nécessaire. Réservez tôt !</div>
-    </div>
+<div class="faq-item">
+  <div class="faq-q" data-en>🏨 Any hotel recommendations nearby?</div>
+  <div class="faq-q" data-fr>🏨 Des hôtels à recommander ?</div>
+  <div class="faq-a" data-en>Several great options close by — <strong>Auberge de Port-Gitana</strong> is literally next door, <strong>Hôtel Kutchi</strong> is right across the street, and <strong>Lake Geneva Hotel</strong> is in nearby Versoix. Many more options in Geneva city centre, just 13 minutes by train from Genthod-Bellevue station. Also possible across the border in France (Ferney-Voltaire, Divonne-les-Bains) — note this requires a car. Book early — August fills up fast!</div>
+  <div class="faq-a" data-fr>Plusieurs bonnes options à proximité — l'<strong>Auberge de Port-Gitana</strong> est juste à côté, l'<strong>Hôtel Kutchi</strong> est en face, et le <strong>Lake Geneva Hotel</strong> est à Versoix. De nombreuses options en ville de Genève, à 13 min en train depuis Genthod-Bellevue. Également possible côté France (Ferney-Voltaire, Divonne-les-Bains) — attention, voiture nécessaire. Réservez tôt !</div>
+</div>
 
-    <div class="faq-item">
-      <div class="faq-q" data-en>🎁 Should I bring a gift?</div>
-      <div class="faq-q" data-fr>🎁 Faut-il apporter un cadeau ?</div>
-      <div class="faq-a" data-en>Your presence is already the best gift!</div>
-      <div class="faq-a" data-fr>Votre présence est déjà le plus beau des cadeaux !</div>
-    </div>
+<div class="faq-item">
+  <div class="faq-q" data-en>🎁 Should I bring a gift?</div>
+  <div class="faq-q" data-fr>🎁 Faut-il apporter un cadeau ?</div>
+  <div class="faq-a" data-en>Your presence is already the best gift!</div>
+  <div class="faq-a" data-fr>Votre présence est déjà le plus beau des cadeaux !</div>
+</div>
 
-    <div class="faq-item">
-      <div class="faq-q" data-en>📸 Will there be a photographer?</div>
-      <div class="faq-q" data-fr>📸 Y aura-t-il un photographe ?</div>
-      <div class="faq-a" data-en>No official photographer — but you are more than welcome to snap away! We'll share a link to a group album where everyone can upload their photos and memories.</div>
-      <div class="faq-a" data-fr>Pas de photographe officiel — mais vous êtes plus que bienvenus à immortaliser la soirée ! Nous partagerons un lien vers un album collectif où chacun pourra déposer ses photos et souvenirs.</div>
-    </div>
+<div class="faq-item">
+  <div class="faq-q" data-en>📸 Will there be a photographer?</div>
+  <div class="faq-q" data-fr>📸 Y aura-t-il un photographe ?</div>
+  <div class="faq-a" data-en>No official photographer — but you are more than welcome to snap away! We'll share a link to a group album where everyone can upload their photos and memories.</div>
+  <div class="faq-a" data-fr>Pas de photographe officiel — mais vous êtes plus que bienvenus à immortaliser la soirée ! Nous partagerons un lien vers un album collectif où chacun pourra déposer ses photos et souvenirs.</div>
+</div>
 
-    <div class="faq-item">
-      <div class="faq-q" data-en>📞 Who do I contact?</div>
-      <div class="faq-q" data-fr>📞 Qui contacter ?</div>
-      <div class="faq-a" data-en>For Marie's guests — <strong>Marie</strong> at <a href="https://wa.me/41794567580" target="_blank" rel="noopener" style="color:var(--lake-deep);text-decoration:none;font-weight:600;border-bottom:1px solid var(--lake);">+41 79 456 75 80</a> <em>(WhatsApp/SMS only, no calls)</em><br>For Cécile's guests — <strong>Cécile</strong> at <a href="https://wa.me/41798168338" target="_blank" rel="noopener" style="color:var(--lake-deep);text-decoration:none;font-weight:600;border-bottom:1px solid var(--lake);">+41 79 816 83 38</a> <em>(WhatsApp/SMS only, no calls)</em></div>
-      <div class="faq-a" data-fr>Pour les invités de Marie — <strong>Marie</strong> au <a href="https://wa.me/41794567580" target="_blank" rel="noopener" style="color:var(--lake-deep);text-decoration:none;font-weight:600;border-bottom:1px solid var(--lake);">+41 79 456 75 80</a> <em>(WhatsApp/SMS uniquement, pas d'appels)</em><br>Pour les invités de Cécile — <strong>Cécile</strong> au <a href="https://wa.me/41798168338" target="_blank" rel="noopener" style="color:var(--lake-deep);text-decoration:none;font-weight:600;border-bottom:1px solid var(--lake);">+41 79 816 83 38</a> <em>(WhatsApp/SMS uniquement, pas d'appels)</em></div>
-    </div>
+<div class="faq-item">
+  <div class="faq-q" data-en>📞 Who do I contact?</div>
+  <div class="faq-q" data-fr>📞 Qui contacter ?</div>
+  <div class="faq-a" data-en>For Marie's guests — <strong>Marie</strong> at <a href="https://wa.me/41794567580" target="_blank" rel="noopener" style="color:var(--lake-deep);text-decoration:none;font-weight:600;border-bottom:1px solid var(--lake);">+41 79 456 75 80</a> <em>(WhatsApp/SMS only, no calls)</em><br>For Cécile's guests — <strong>Cécile</strong> at <a href="https://wa.me/41798168338" target="_blank" rel="noopener" style="color:var(--lake-deep);text-decoration:none;font-weight:600;border-bottom:1px solid var(--lake);">+41 79 816 83 38</a> <em>(WhatsApp/SMS only, no calls)</em></div>
+  <div class="faq-a" data-fr>Pour les invités de Marie — <strong>Marie</strong> au <a href="https://wa.me/41794567580" target="_blank" rel="noopener" style="color:var(--lake-deep);text-decoration:none;font-weight:600;border-bottom:1px solid var(--lake);">+41 79 456 75 80</a> <em>(WhatsApp/SMS uniquement, pas d'appels)</em><br>Pour les invités de Cécile — <strong>Cécile</strong> au <a href="https://wa.me/41798168338" target="_blank" rel="noopener" style="color:var(--lake-deep);text-decoration:none;font-weight:600;border-bottom:1px solid var(--lake);">+41 79 816 83 38</a> <em>(WhatsApp/SMS uniquement, pas d'appels)</em></div>
+</div>
+```
 
   </div>
 </section>
 </div>
 
 <!-- RSVP -->
+
 <div style="background:#f4f0e8;padding:0 20px 80px;">
 <section id="rsvp" style="max-width:860px;padding-top:0;margin:0 auto;">
-  <div style="background:var(--navy);background-image:radial-gradient(circle at 20% 0%, rgba(244,201,138,0.12) 0%, transparent 50%),radial-gradient(circle at 80% 100%, rgba(77,184,200,0.1) 0%, transparent 50%);border-radius:28px;padding:70px 40px;color:white;text-align:center;box-shadow:0 12px 40px rgba(26,46,74,0.18);">
+  <div style="background:var(--ink);border-radius:0;padding:90px 40px;color:#faf6ec;text-align:center;border-top:3px solid var(--gold);">
     <h2 class="section-title" style="color:white;" data-en>RSVP</h2>
     <h2 class="section-title" style="color:white;" data-fr>RSVP</h2>
 
-    <p style="font-family:'Cormorant Garamond',serif;font-size:20px;font-style:italic;opacity:0.9;max-width:520px;margin:0 auto 12px;line-height:1.6;" data-en>
-      We can't wait to celebrate with you! Please confirm your attendance — for you and any companions — using the form below.
-    </p>
-    <p style="font-family:'Cormorant Garamond',serif;font-size:20px;font-style:italic;opacity:0.9;max-width:520px;margin:0 auto 12px;line-height:1.6;" data-fr>
-      Nous avons hâte de fêter ça avec vous ! Confirmez votre présence — pour vous et vos accompagnants — via le formulaire ci-dessous.
-    </p>
+```
+<p style="font-family:'Cormorant Garamond',serif;font-size:20px;font-style:italic;opacity:0.9;max-width:520px;margin:0 auto 12px;line-height:1.6;" data-en>
+  We can't wait to celebrate with you! Please confirm your attendance — for you and any companions — using the form below.
+</p>
+<p style="font-family:'Cormorant Garamond',serif;font-size:20px;font-style:italic;opacity:0.9;max-width:520px;margin:0 auto 12px;line-height:1.6;" data-fr>
+  Nous avons hâte de fêter ça avec vous ! Confirmez votre présence — pour vous et vos accompagnants — via le formulaire ci-dessous.
+</p>
 
-    <p style="font-family:'Cormorant Garamond',serif;font-size:15px;opacity:0.55;max-width:520px;margin:0 auto 36px;line-height:1.6;" data-en>
-      The form is hosted on Google Forms and takes about 2 minutes. Your answers go directly to Cécile &amp; Marie.
-    </p>
-    <p style="font-family:'Cormorant Garamond',serif;font-size:15px;opacity:0.55;max-width:520px;margin:0 auto 36px;line-height:1.6;" data-fr>
-      Le formulaire est sur Google Forms et prend environ 2 minutes. Vos réponses parviennent directement à Cécile &amp; Marie.
-    </p>
+<p style="font-family:'Cormorant Garamond',serif;font-size:15px;opacity:0.55;max-width:520px;margin:0 auto 36px;line-height:1.6;" data-en>
+  The form is hosted on Google Forms and takes about 2 minutes. Your answers go directly to Cécile &amp; Marie.
+</p>
+<p style="font-family:'Cormorant Garamond',serif;font-size:15px;opacity:0.55;max-width:520px;margin:0 auto 36px;line-height:1.6;" data-fr>
+  Le formulaire est sur Google Forms et prend environ 2 minutes. Vos réponses parviennent directement à Cécile &amp; Marie.
+</p>
 
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdCf20T1UDDCf4L3O2EkX-6yPdk_PMsz2WsRoQzZOHiqxlyCA/viewform?usp=header"
-       target="_blank" rel="noopener"
-       class="rsvp-btn-new">
-      <span data-en>Open the RSVP Form →</span>
-      <span data-fr>Ouvrir le formulaire RSVP →</span>
-    </a>
+<a href="https://docs.google.com/forms/d/e/1FAIpQLSdCf20T1UDDCf4L3O2EkX-6yPdk_PMsz2WsRoQzZOHiqxlyCA/viewform?usp=header"
+   target="_blank" rel="noopener"
+   class="rsvp-btn-new">
+  <span data-en>Open the RSVP Form →</span>
+  <span data-fr>Ouvrir le formulaire RSVP →</span>
+</a>
 
-    <p class="rsvp-deadline" data-en style="margin-top:32px;">Please reply by July 15, 2026</p>
-    <p class="rsvp-deadline" data-fr style="margin-top:32px;">Merci de répondre avant le 15 juillet 2026</p>
+<p class="rsvp-deadline" data-en style="margin-top:32px;">Please reply by July 15, 2026</p>
+<p class="rsvp-deadline" data-fr style="margin-top:32px;">Merci de répondre avant le 15 juillet 2026</p>
+```
+
   </div>
 </section>
 </div>
 
 <!-- FOOTER -->
+
 <footer>
   <strong>Cécile &amp; Marie — 50</strong>
   <span data-en>August 29, 2026 · Port-Gitana, Bellevue · Geneva</span>
@@ -1546,5 +1664,6 @@
     if (el) el.remove();
   }
 </script>
+
 </body>
 </html>
